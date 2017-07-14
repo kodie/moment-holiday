@@ -10,4 +10,3 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Initial release.
 
 [Unreleased]: https://github.com/kodie/moment-holiday/compare/v1.0.0...HEAD
- 
