@@ -1,0 +1,35 @@
+{
+  "name": "moment-holiday",
+  "version": "1.0.0",
+  "description": "A Moment.js plugin for handling holidays.",
+  "keywords": [
+    "moment",
+    "momentjs",
+    "holiday",
+    "holidays"
+  ],
+  "author": {
+    "name": "Kodie Grantham",
+    "email": "kodie.grantham@gmail.com",
+    "url": "http://kodieg.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kodie/moment-holiday.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kodie/moment-holiday/issues"
+  },
+  "homepage": "https://github.com/kodie/moment-holiday",
+  "license": "MIT",
+  "main": "moment-holiday.js",
+  "dependencies": {
+    "moment": ">=2.0.0"
+  },
+  "devDependencies": {
+    "ava": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "ava"
+  }
+}
