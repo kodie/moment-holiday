@@ -48,3 +48,65 @@ test('isHoliday_3', function(t){
   var w = moment('2018-11-12').isHoliday(true);
   t.is(w, "Veteran's Day");
 });
+
+test('holidaysBetween_1', function(t){
+  var w = moment('2011-11-01').holidaysBetween('2011-12-31');
+  t.is(typeof w, 'object');
+  t.is(Object.keys(w).length, 6);
+  t.is(w[Object.keys(w)[4]].isHoliday(), 'Christmas Day');
+});
+
+test('holidaysBetween_2', function(t){
+  var w = moment('2010-10-03').holidaysBetween('2010-10-10');
+  t.false(w);
+});
+
+test('holidaysBetween_3', function(t){
+  var w = moment('2011-11-01').holidaysBetween('2011-12-31', true);
+  t.is(typeof w, 'object');
+  t.is(Object.keys(w).length, 6);
+  t.true(w[Object.keys(w)[5]].isSame('2011-12-30', 'day'));
+});
+
+test('modifyHolidays_set_1', function(t){
+  moment().modifyHolidays.set(['New Years Day', 'Memorial Day', 'Thanksgiving']);
+  var w = moment().holiday();
+  t.is(typeof w, 'object');
+  t.is(Object.keys(w).length, 3);
+});
+
+test('modifyHolidays_set_2', function(t){
+  moment().modifyHolidays.set({
+    "My Birthday": {
+      date: '11/17',
+      keywords: ['my', 'birthday']
+    },
+    "Last Friday of the year": {
+      date: '12/(5,-1)',
+      keywords_y: ['friday']
+    }
+  });
+
+  var w = moment().holiday();
+  t.is(typeof w, 'object');
+  t.is(Object.keys(w).length, 2);
+});
+
+test('modifyHolidays_add', function(t){
+  moment().modifyHolidays.add({
+    "Inauguration Day": {
+      date: '1/20',
+      keywords_y: ['inauguration']
+    }
+  });
+
+  var w = moment('2006-07-07').holiday('Inauguration');
+  t.true(moment.isMoment(w));
+  t.true(w.isSame('2006-01-20', 'day'));
+});
+
+test('modifyHolidays_remove', function(t){
+  moment().modifyHolidays.remove('Christmas');
+  var w = moment().holiday('Christmas');
+  t.false(w);
+});

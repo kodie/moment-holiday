@@ -26,6 +26,10 @@
       date: '2/(1,3)',
       keywords: ['george', 'washington', 'president']
     },
+    "Saint Patrick's Day": {
+      date: '3/17',
+      keywords: ['patrick', 'saint', 'paddy', 'patty']
+    },
     "Memorial Day": {
       date: '5/(1,-1)',
       keywords_y: ['memorial']
@@ -121,7 +125,7 @@
     return m.startOf('day');
   };
 
-  var findHoliday = function(self, holiday, adjust) {
+  var findHoliday = function(self, holiday, adjust, parse) {
     var h = moment.fn.holidays;
     var pt = {};
     var wn = [];
@@ -165,11 +169,15 @@
 
     if (!wn.length || wn.length > 1) { return false; }
 
-    var d = parseHoliday(self, h[wn[0]].date, adjust);
+    if (parse !== false) {
+      var d = parseHoliday(self, h[wn[0]].date, adjust);
 
-    if (d) {
-      obj[wn[0]] = d;
-      return obj;
+      if (d) {
+        obj[wn[0]] = d;
+        return obj;
+      }
+    } else {
+      return wn[0];
     }
 
     return false;
@@ -220,6 +228,53 @@
     }
 
     return false;
+  };
+
+  moment.fn.holidaysBetween = function(date, adjust) {
+    if (!date) { date = new Date(); }
+    var h = getAllHolidays(this, adjust);
+
+    for (var hd in h) {
+      if (!h.hasOwnProperty(hd)) { continue; }
+      if (h[hd].isBefore(this) || h[hd].isAfter(date)) { delete(h[hd]); }
+    }
+
+    if (!Object.keys(h).length) { return false; }
+
+    return h;
+  };
+
+  moment.fn.modifyHolidays = {
+    set: function(holidays) {
+      if (holidays.constructor === Array) {
+        var hs = [];
+
+        for (i = 0; i < holidays.length; i++) {
+          var d = findHoliday(this, holidays[i], null, false);
+          if (d) { hs.push(d); }
+        }
+
+        for (var hd in moment.fn.holidays) {
+          if (!moment.fn.holidays.hasOwnProperty(hd)) { continue; }
+          if (hs.indexOf(hd) === -1) { delete(moment.fn.holidays[hd]); }
+        }
+      } else {
+        moment.fn.holidays = holidays;
+      }
+    },
+
+    add: function(holidays) {
+      moment.fn.holidays = Object.assign({}, moment.fn.holidays, holidays);
+    },
+
+    remove: function(holidays) {
+      if (holidays.constructor !== Array) { holidays = [holidays]; }
+
+      for (i = 0; i < holidays.length; i++) {
+        var d = findHoliday(this, holidays[i], null, false);
+        if (d) { delete(moment.fn.holidays[d]); }
+      }
+    }
   };
 
   if ((typeof module !== 'undefined' && module !== null ? module.exports : void 0) != null) {

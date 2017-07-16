@@ -1,4 +1,4 @@
-# moment-holiday [![Build Status](https://travis-ci.org/kodie/moment-holiday.svg?branch=master)](https://travis-ci.org/kodie/moment-holiday)
+# moment-holiday [![npm version](https://badge.fury.io/js/moment-holiday.svg)](https://badge.fury.io/js/moment-holiday) [![Build Status](https://travis-ci.org/kodie/moment-holiday.svg?branch=master)](https://travis-ci.org/kodie/moment-holiday)
 
 A [Moment.js](https://github.com/moment/moment) plugin for handling holidays.
 
@@ -75,8 +75,39 @@ moment('2017-12-31').isHoliday(true);
 //false
 ```
 
+### holidaysBetween(date, adjust)
+```javascript
+moment().holidaysBetween(moment().endOf('year'));
+//{ 'Labor Day': moment("2017-09-04T00:00:00.000"),
+//  'Columbus Day': moment("2017-10-09T00:00:00.000"),
+//  Halloween: moment("2017-10-31T00:00:00.000"),
+//  'Veteran\'s Day': moment("2017-11-11T00:00:00.000"),
+//  'Thanksgiving Day': moment("2017-11-23T00:00:00.000"),
+//  'Day after Thanksgiving': moment("2017-11-24T00:00:00.000"),
+//  'Christmas Eve': moment("2017-12-24T00:00:00.000"),
+//  'Christmas Day': moment("2017-12-25T00:00:00.000"),
+//  'New Year\'s Eve': moment("2017-12-31T00:00:00.000") }
+
+moment('2011-11-01').holidaysBetween('2011-12-31');
+//{ 'Veteran\'s Day': moment("2011-11-11T00:00:00.000"),
+//  'Thanksgiving Day': moment("2011-11-24T00:00:00.000"),
+//  'Day after Thanksgiving': moment("2011-11-25T00:00:00.000"),
+//  'Christmas Eve': moment("2011-12-24T00:00:00.000"),
+//  'Christmas Day': moment("2011-12-25T00:00:00.000"),
+//  'New Year\'s Eve': moment("2011-12-31T00:00:00.000") }
+
+moment('2011-11-01').holidaysBetween('2011-12-31', true);
+//{ 'Veteran\'s Day': moment("2011-11-11T00:00:00.000"),
+//  'Thanksgiving Day': moment("2011-11-24T00:00:00.000"),
+//  'Day after Thanksgiving': moment("2011-11-25T00:00:00.000"),
+//  'Christmas Eve': moment("2011-12-23T00:00:00.000"),
+//  'Christmas Day': moment("2011-12-26T00:00:00.000"),
+//  'New Year\'s Eve': moment("2011-12-30T00:00:00.000") }
+```
+
 #### Parameters
 * **holidays** (`holiday` function only) - The holiday(s) you would like to find. Can be a string to return a single moment object, or an array of strings to return an object of moment objects with the holiday names as keys. Defaults to all holidays.
+* **date** (`holidaysBetween` function only) - The end date range to find holidays in. Accepts a moment object or a string that moment would accept. Defaults to today.
 * **adjust** - Set to `true` to make all holidays that land on a Saturday go to the prior Friday and all holidays that land on a Sunday go to the following Monday. Defaults to `false`.
 
 All parameters are optional.
@@ -88,6 +119,7 @@ The following holidays are built-in:
 * Martin Luther King Jr. Day
 * Valentine's Day
 * Washington's Birthday
+* Saint Patrick's Day
 * Memorial Day
 * Mother's Day
 * Father's Day
@@ -102,19 +134,52 @@ The following holidays are built-in:
 * Christmas Day
 * New Year's Eve
 
-### Adding holidays
-You can add holidays for use in the plugin by adding them to the `moment.fn.holidays` object.
+### Modifying Holidays
+You can add and remove holidays by using the following helper functions:
 
+#### modifyHolidays.set
 ```javascript
-moment.fn.holidays['Inauguration Day'] = {
-  date: '1/20',
-  keywords_y = ['inauguration']
-};
+moment().modifyHolidays.set(['New Years Day', 'Memorial Day', 'Thanksgiving']);
 
-moment.fn.holidays['Last Friday of the year'] = {
-  date: '12/(5,-1)',
-  keywords_y = ['friday']
-};
+moment().holiday(); // Returns all holidays
+//{ 'New Year\'s Day': moment("2017-01-01T00:00:00.000"),
+//  'Memorial Day': moment("2017-05-29T00:00:00.000"),
+//  'Thanksgiving Day': moment("2017-11-23T00:00:00.000") }
+
+moment().modifyHolidays.set({
+  "My Birthday": {
+    date: '11/17',
+    keywords: ['my', 'birthday']
+  },
+  "Last Friday of the year": {
+    date: '12/(5,-1)',
+    keywords_y: ['friday']
+  }
+});
+
+moment().holiday(); // Returns all holidays
+//{ 'My Birthday': moment("2017-11-17T00:00:00.000"),
+//  'Last Friday of the year': moment("2017-12-29T00:00:00.000") }
+```
+
+#### modifyHolidays.add
+```javascript
+moment().modifyHolidays.add({
+  "Inauguration Day": {
+    date: '1/20',
+    keywords_y: ['inauguration']
+  }
+});
+
+moment().holiday('Inauguration');
+//moment("2017-01-20T00:00:00.000")
+```
+
+#### modifyHolidays.remove
+```javascript
+moment().modifyHolidays.remove('Christmas');
+
+moment().modifyHolidays.remove(['Dad Day', 'Mom Day', 'Saint Paddys Day']);
 ```
 
 Holiday objects accept the following options:
@@ -131,11 +196,6 @@ Holiday objects accept the following options:
 * **keywords_n** - An array of banned keywords.
 
 View the source of [moment-holiday.js](moment-holiday.js) for a better look at how the keywords work.
-
-### Removing holidays
-```javascript
-delete(moment.fn.holidays['Christmas Day']);
-```
 
 ## License
 MIT. See the License file for more info.
