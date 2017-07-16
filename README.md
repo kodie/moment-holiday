@@ -103,6 +103,17 @@ moment('2011-11-01').holidaysBetween('2011-12-31', true);
 //  'Christmas Eve': moment("2011-12-23T00:00:00.000"),
 //  'Christmas Day': moment("2011-12-26T00:00:00.000"),
 //  'New Year\'s Eve': moment("2011-12-30T00:00:00.000") }
+
+moment('2017-01-01').holidaysBetween();
+//{ 'New Year\'s Day': moment("2017-01-01T00:00:00.000"),
+//  'Martin Luther King Jr. Day': moment("2017-01-16T00:00:00.000"),
+//  'Valentine\'s Day': moment("2017-02-14T00:00:00.000"),
+//  'Washington\'s Birthday': moment("2017-02-20T00:00:00.000"),
+//  'Saint Patrick\'s Day': moment("2017-03-17T00:00:00.000"),
+//  'Memorial Day': moment("2017-05-29T00:00:00.000"),
+//  'Mother\'s Day': moment("2017-05-14T00:00:00.000"),
+//  'Father\'s Day': moment("2017-06-18T00:00:00.000"),
+//  'Independence Day': moment("2017-07-04T00:00:00.000") }
 ```
 
 #### Parameters
