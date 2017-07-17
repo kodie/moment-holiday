@@ -1,5 +1,5 @@
 //! moment-holiday.js
-//! version : 1.1.0
+//! version : 1.2.0
 //! author : Kodie Grantham
 //! license : MIT
 //! github.com/kodie/moment-holiday
@@ -89,30 +89,41 @@
     }
   };
 
+  var parserExtensions = [];
+
   var parseHoliday = function(self, date, adjust) {
-    date = date.split('/');
-    var m = moment(self).month((parseInt(date[0]) - 1));
+    var m;
 
-    if (date[1].charAt(0) == '(') {
-      var w = date[1].slice(1, -1).split(',');
-      var wd = parseInt(w[0]);
-      var dt = parseInt(w[1]);
-      var d = moment(m).startOf('month');
-      var limit = (moment(m).endOf('month').diff(d, 'days') + 1);
-      var days = [];
+    for (var i = 0; i < parserExtensions.length; i++) {
+      if (pe = parserExtensions[i](self, date)) { m = pe; }
+    }
 
-      for (var i = 0; i < limit; i++) {
-        if (d.day() === wd) { days.push(moment(d)); }
-        d.add(1, 'day');
-      }
+    if (!moment.isMoment(m)) {
+      m = moment(self);
+      date = date.split('/');
+      m.month((parseInt(date[0]) - 1));
 
-      if (dt < 0) {
-        m = days[days.length + dt];
+      if (date[1].charAt(0) == '(') {
+        var w = date[1].slice(1, -1).split(',');
+        var wd = parseInt(w[0]);
+        var dt = parseInt(w[1]);
+        var d = moment(m).startOf('month');
+        var limit = (moment(m).endOf('month').diff(d, 'days') + 1);
+        var days = [];
+
+        for (var i = 0; i < limit; i++) {
+          if (d.day() === wd) { days.push(moment(d)); }
+          d.add(1, 'day');
+        }
+
+        if (dt < 0) {
+          m = days[days.length + dt];
+        } else {
+          m = days[dt - 1];
+        }
       } else {
-        m = days[dt - 1];
+        m.date(date[1]);
       }
-    } else {
-      m.date(date[1]);
     }
 
     if (!moment.isMoment(m)) { return false; }
@@ -370,6 +381,10 @@
         var d = findHoliday(this, holidays[i], null, false);
         if (d) { delete(moment.holidays[d]); }
       }
+    },
+
+    extendParser: function(func) {
+      parserExtensions.push(func);
     }
   };
 
