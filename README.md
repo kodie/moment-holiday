@@ -39,7 +39,7 @@ Searches for holiday(s) by keywords. Returns a single moment object, an object c
 
 #### Parameters
 * **holidays** - The holiday(s) to search for. Can be a string to search for a single holiday or an array to search for multiple. Defaults to all holidays.
-* **adjust** - See [global parameters](#globalparameters).
+* **adjust** - See [global parameters](#global-parameters).
 
 #### Examples
 ```javascript
@@ -74,7 +74,7 @@ moment().holidays();
 Returns the name of the holiday if the given date is in fact a holiday or `false` if it isn't.
 
 #### Parameters
-* **adjust** - See [global parameters](#globalparameters).
+* **adjust** - See [global parameters](#global-parameters).
 
 #### Examples
 ```javascript
@@ -98,7 +98,7 @@ Returns an array containing the previous holidays before the given date.
 
 #### Parameters
 * **count** - The number of previous holidays to fetch. Defaults to `1`.
-* **adjust** - See [global parameters](#globalparameters).
+* **adjust** - See [global parameters](#global-parameters).
 
 #### Examples
 ```javascript
@@ -127,7 +127,7 @@ Returns an array containing the next holidays after the given date.
 
 #### Parameters
 * **count** - The number of upcoming holidays to fetch. Defaults to `1`.
-* **adjust** - See [global parameters](#globalparameters).
+* **adjust** - See [global parameters](#global-parameters).
 
 #### Examples
 ```javascript
@@ -154,7 +154,7 @@ Returns an array containing the holidays between the given date and the `date` p
 
 #### Parameters
 * **date** - The end date range for holidays to get. Can be any string that moment accepts or a moment object. Defaults to today.
-* **adjust** - See [global parameters](#globalparameters).
+* **adjust** - See [global parameters](#global-parameters).
 
 #### Examples
 ```javascript
