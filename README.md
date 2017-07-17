@@ -30,9 +30,18 @@ moment().holiday('Christmas');
 bower install --save moment-holiday
 ```
 
-## Examples
+## Functions
 
 ### holiday(holidays, adjust)
+*or `holidays(holidays, adjust)`*
+
+Searches for holiday(s) by keywords. Returns a single moment object, an object containing moment objects with the holiday names as keys, or `false` if no holidays were found.
+
+#### Parameters
+* **holidays** - The holiday(s) to search for. Can be a string to search for a single holiday or an array to search for multiple. Defaults to all holidays.
+* **adjust** - See [global parameters](#globalparameters).
+
+#### Examples
 ```javascript
 moment().holiday('Memorial Day');
 //moment("2017-05-29T00:00:00.000")
@@ -43,11 +52,11 @@ moment().holiday('Totally not a holiday');
 moment().holiday(['Dad Day']);
 //{ 'Father\'s Day': moment("2017-06-18T00:00:00.000") }
 
-moment().holiday(['Turkey Day', 'New Years Eve']);
+moment().holidays(['Turkey Day', 'New Years Eve']);
 //{ 'Thanksgiving Day': moment("2017-11-23T00:00:00.000"),
 //  'New Year\'s Eve': moment("2017-12-31T00:00:00.000") }
 
-moment().holiday(['Not actually a holiday', 'Mothers Day']);
+moment().holidays(['Not actually a holiday', 'Mothers Day']);
 //{ 'Mother\'s Day': moment("2017-05-14T00:00:00.000") }
 
 moment('2018-01-01').holiday('Veterans Day');
@@ -56,11 +65,18 @@ moment('2018-01-01').holiday('Veterans Day');
 moment('2018-01-01').holiday('Veterans Day', true);
 //moment("2018-11-12T00:00:00.000")
 
-moment().holiday();
+moment().holidays();
 //Returns all holidays
 ```
 
 ### isHoliday(adjust)
+
+Returns the name of the holiday if the given date is in fact a holiday or `false` if it isn't.
+
+#### Parameters
+* **adjust** - See [global parameters](#globalparameters).
+
+#### Examples
 ```javascript
 moment('2017-12-25').isHoliday();
 //Christmas Day
@@ -75,53 +91,111 @@ moment('2017-12-31').isHoliday(true);
 //false
 ```
 
-### holidaysBetween(date, adjust)
-```javascript
-moment().holidaysBetween(moment().endOf('year'));
-//{ 'Labor Day': moment("2017-09-04T00:00:00.000"),
-//  'Columbus Day': moment("2017-10-09T00:00:00.000"),
-//  Halloween: moment("2017-10-31T00:00:00.000"),
-//  'Veteran\'s Day': moment("2017-11-11T00:00:00.000"),
-//  'Thanksgiving Day': moment("2017-11-23T00:00:00.000"),
-//  'Day after Thanksgiving': moment("2017-11-24T00:00:00.000"),
-//  'Christmas Eve': moment("2017-12-24T00:00:00.000"),
-//  'Christmas Day': moment("2017-12-25T00:00:00.000"),
-//  'New Year\'s Eve': moment("2017-12-31T00:00:00.000") }
+### previousHoliday(count, adjust)
+*or `previousHolidays(count, adjust)`*
 
-moment('2011-11-01').holidaysBetween('2011-12-31');
-//{ 'Veteran\'s Day': moment("2011-11-11T00:00:00.000"),
-//  'Thanksgiving Day': moment("2011-11-24T00:00:00.000"),
-//  'Day after Thanksgiving': moment("2011-11-25T00:00:00.000"),
-//  'Christmas Eve': moment("2011-12-24T00:00:00.000"),
-//  'Christmas Day': moment("2011-12-25T00:00:00.000"),
-//  'New Year\'s Eve': moment("2011-12-31T00:00:00.000") }
-
-moment('2011-11-01').holidaysBetween('2011-12-31', true);
-//{ 'Veteran\'s Day': moment("2011-11-11T00:00:00.000"),
-//  'Thanksgiving Day': moment("2011-11-24T00:00:00.000"),
-//  'Day after Thanksgiving': moment("2011-11-25T00:00:00.000"),
-//  'Christmas Eve': moment("2011-12-23T00:00:00.000"),
-//  'Christmas Day': moment("2011-12-26T00:00:00.000"),
-//  'New Year\'s Eve': moment("2011-12-30T00:00:00.000") }
-
-moment('2017-01-01').holidaysBetween();
-//{ 'New Year\'s Day': moment("2017-01-01T00:00:00.000"),
-//  'Martin Luther King Jr. Day': moment("2017-01-16T00:00:00.000"),
-//  'Valentine\'s Day': moment("2017-02-14T00:00:00.000"),
-//  'Washington\'s Birthday': moment("2017-02-20T00:00:00.000"),
-//  'Saint Patrick\'s Day': moment("2017-03-17T00:00:00.000"),
-//  'Memorial Day': moment("2017-05-29T00:00:00.000"),
-//  'Mother\'s Day': moment("2017-05-14T00:00:00.000"),
-//  'Father\'s Day': moment("2017-06-18T00:00:00.000"),
-//  'Independence Day': moment("2017-07-04T00:00:00.000") }
-```
+Returns an array containing the previous holidays before the given date.
 
 #### Parameters
-* **holidays** (`holiday` function only) - The holiday(s) you would like to find. Can be a string to return a single moment object, or an array of strings to return an object of moment objects with the holiday names as keys. Defaults to all holidays.
-* **date** (`holidaysBetween` function only) - The end date range to find holidays in. Accepts a moment object or a string that moment would accept. Defaults to today.
-* **adjust** - Set to `true` to make all holidays that land on a Saturday go to the prior Friday and all holidays that land on a Sunday go to the following Monday. Defaults to `false`.
+* **count** - The number of previous holidays to fetch. Defaults to `1`.
+* **adjust** - See [global parameters](#globalparameters).
 
-All parameters are optional.
+#### Examples
+```javascript
+moment().previousHoliday();
+//[ moment("2017-07-04T00:00:00.000") ]
+
+moment('2001-02-14').previousHolidays(5);
+//[ moment("2001-01-15T00:00:00.000"),
+//  moment("2001-01-01T00:00:00.000"),
+//  moment("2000-12-31T00:00:00.000"),
+//  moment("2000-12-25T00:00:00.000"),
+//  moment("2000-12-24T00:00:00.000") ]
+
+moment('2001-02-14').previousHolidays(5, true);
+//[ moment("2001-01-15T00:00:00.000"),
+//  moment("2001-01-01T00:00:00.000"),
+//  moment("2000-12-25T00:00:00.000"),
+//  moment("2000-11-24T00:00:00.000"),
+//  moment("2000-11-23T00:00:00.000") ]
+```
+
+### nextHoliday(count, adjust)
+*or `nextHolidays(count, adjust)`*
+
+Returns an array containing the next holidays after the given date.
+
+#### Parameters
+* **count** - The number of upcoming holidays to fetch. Defaults to `1`.
+* **adjust** - See [global parameters](#globalparameters).
+
+#### Examples
+```javascript
+moment().nextHoliday();
+//[ moment("2017-09-04T00:00:00.000") ]
+
+moment('2010-05-23').nextHolidays(5);
+//[ moment("2010-05-31T00:00:00.000"),
+//  moment("2010-06-20T00:00:00.000"),
+//  moment("2010-07-04T00:00:00.000"),
+//  moment("2010-09-06T00:00:00.000"),
+//  moment("2010-10-11T00:00:00.000") ]
+
+moment('2010-05-23').nextHolidays(5, true);
+//[ moment("2010-05-31T00:00:00.000"),
+//  moment("2010-06-21T00:00:00.000"),
+//  moment("2010-07-05T00:00:00.000"),
+//  moment("2010-09-06T00:00:00.000"),
+//  moment("2010-10-11T00:00:00.000") ]
+```
+
+### holidaysBetween(date, adjust)
+Returns an array containing the holidays between the given date and the `date` parameter or `false` if no dates were found.
+
+#### Parameters
+* **date** - The end date range for holidays to get. Can be any string that moment accepts or a moment object. Defaults to today.
+* **adjust** - See [global parameters](#globalparameters).
+
+#### Examples
+```javascript
+moment().holidaysBetween(moment().endOf('year'));
+//[ moment("2017-09-04T00:00:00.000"),
+//  moment("2017-10-09T00:00:00.000"),
+//  moment("2017-10-31T00:00:00.000"),
+//  moment("2017-11-11T00:00:00.000"),
+//  moment("2017-11-23T00:00:00.000"),
+//  moment("2017-11-24T00:00:00.000"),
+//  moment("2017-12-24T00:00:00.000"),
+//  moment("2017-12-25T00:00:00.000") ]
+
+moment('2011-11-01').holidaysBetween('2011-12-31');
+//[ moment("2011-11-11T00:00:00.000"),
+//  moment("2011-11-24T00:00:00.000"),
+//  moment("2011-11-25T00:00:00.000"),
+//  moment("2011-12-24T00:00:00.000"),
+//  moment("2011-12-25T00:00:00.000") ]
+
+moment('2011-11-01').holidaysBetween('2011-12-31', true);
+//[ moment("2011-11-11T00:00:00.000"),
+//  moment("2011-11-24T00:00:00.000"),
+//  moment("2011-11-25T00:00:00.000"),
+//  moment("2011-12-23T00:00:00.000"),
+//  moment("2011-12-26T00:00:00.000"),
+//  moment("2011-12-30T00:00:00.000") ]
+
+moment('2017-01-01').holidaysBetween();
+//[ moment("2017-01-16T00:00:00.000"),
+//  moment("2017-02-14T00:00:00.000"),
+//  moment("2017-02-20T00:00:00.000"),
+//  moment("2017-03-17T00:00:00.000"),
+//  moment("2017-05-14T00:00:00.000"),
+//  moment("2017-05-29T00:00:00.000"),
+//  moment("2017-06-18T00:00:00.000"),
+//  moment("2017-07-04T00:00:00.000") ]
+```
+
+### Global Parameters
+* **adjust** - Set to `true` to make all holidays that land on a Saturday go to the prior Friday and all holidays that land on a Sunday go to the following Monday. Defaults to `false`.
 
 ## The Holidays
 The following holidays are built-in:

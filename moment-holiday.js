@@ -1,5 +1,5 @@
 //! moment-holiday.js
-//! version : 1.0.0
+//! version : 1.1.0
 //! author : Kodie Grantham
 //! license : MIT
 //! github.com/kodie/moment-holiday
@@ -7,7 +7,7 @@
 (function() {
   var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? require('moment') : this.moment;
 
-  moment.fn.holidays = {
+  moment.holidays = {
     "New Year's Day": {
       date: '1/1',
       keywords: ['new'],
@@ -126,7 +126,7 @@
   };
 
   var findHoliday = function(self, holiday, adjust, parse) {
-    var h = moment.fn.holidays;
+    var h = moment.holidays;
     var pt = {};
     var wn = [];
     var obj = {};
@@ -184,7 +184,7 @@
   };
 
   var getAllHolidays = function(self, adjust) {
-    var h = moment.fn.holidays;
+    var h = moment.holidays;
     var d = {};
 
     for (var hd in h) {
@@ -195,8 +195,53 @@
     return d;
   };
 
+  var holidayLoop = function(self, count, forward, adjust) {
+    if (!count) { count = 1; }
+
+    var h = getAllHolidays(self, adjust);
+    var l = moment(self);
+    var y = self.year();
+    var w = [];
+
+    for (i = 0; i < count; i++) {
+      var d = moment(l);
+
+      while (true) {
+        var b = false;
+
+        if (forward) {
+          d.add(1, 'day');
+        } else {
+          d.subtract(1, 'day');
+        }
+
+        if (d.year() !== y) {
+          h = getAllHolidays(d, adjust);
+          y = d.year();
+        }
+
+        if (!Object.keys(h).length) { b = true; break; }
+
+        for (var hd in h) {
+          if (d.isSame(h[hd], 'day')) {
+            w.push(h[hd]);
+            l = moment(d);
+            b = true;
+            break;
+          }
+        }
+
+        if (b) { break; }
+      }
+    }
+
+    if (!w.length) { return false; }
+
+    return w;
+  };
+
   moment.fn.holiday = function(holidays, adjust) {
-    var h = moment.fn.holidays;
+    var h = moment.holidays;
     var d = {};
     var single = false;
 
@@ -219,6 +264,10 @@
     return d;
   };
 
+  moment.fn.holidays = function(holidays, adjust) {
+    return this.holiday(holidays, adjust);
+  };
+
   moment.fn.isHoliday = function(adjust) {
     var h = getAllHolidays(this, adjust);
 
@@ -230,18 +279,52 @@
     return false;
   };
 
-  moment.fn.holidaysBetween = function(date, adjust) {
-    if (!date) { date = new Date(); }
-    var h = getAllHolidays(this, adjust);
+  moment.fn.previousHoliday = function(count, adjust) {
+    return holidayLoop(this, count, false, adjust);
+  };
 
-    for (var hd in h) {
-      if (!h.hasOwnProperty(hd)) { continue; }
-      if (h[hd].isBefore(this) || h[hd].isAfter(date)) { delete(h[hd]); }
+  moment.fn.previousHolidays = function(count, adjust) {
+    return this.previousHoliday(count, adjust);
+  };
+
+  moment.fn.nextHoliday = function(count, adjust) {
+    return holidayLoop(this, count, true, adjust);
+  };
+
+  moment.fn.nextHolidays = function(count, adjust) {
+    return this.nextHoliday(count, adjust);
+  };
+
+  moment.fn.holidaysBetween = function(date, adjust) {
+    if (!date) { date = new Date; }
+    date = moment(date).subtract(1, 'day');
+
+    var h = getAllHolidays(this, adjust);
+    var d = moment(this);
+    var y = d.year();
+    var w = [];
+
+    for (i = 0; i < date.diff(this, 'days'); i++) {
+      d.add(1, 'day');
+
+      if (d.year() !== y) {
+        h = getAllHolidays(d, adjust);
+        y = d.year();
+      }
+
+      if (!Object.keys(h).length) { break; }
+
+      for (var hd in h) {
+        if (d.isSame(h[hd], 'day')) {
+          w.push(h[hd]);
+          break;
+        }
+      }
     }
 
-    if (!Object.keys(h).length) { return false; }
+    if (!w.length) { return false; }
 
-    return h;
+    return w;
   };
 
   moment.fn.modifyHolidays = {
@@ -254,17 +337,17 @@
           if (d) { hs.push(d); }
         }
 
-        for (var hd in moment.fn.holidays) {
-          if (!moment.fn.holidays.hasOwnProperty(hd)) { continue; }
-          if (hs.indexOf(hd) === -1) { delete(moment.fn.holidays[hd]); }
+        for (var hd in moment.holidays) {
+          if (!moment.holidays.hasOwnProperty(hd)) { continue; }
+          if (hs.indexOf(hd) === -1) { delete(moment.holidays[hd]); }
         }
       } else {
-        moment.fn.holidays = holidays;
+        moment.holidays = holidays;
       }
     },
 
     add: function(holidays) {
-      moment.fn.holidays = Object.assign({}, moment.fn.holidays, holidays);
+      moment.holidays = Object.assign({}, moment.holidays, holidays);
     },
 
     remove: function(holidays) {
@@ -272,7 +355,7 @@
 
       for (i = 0; i < holidays.length; i++) {
         var d = findHoliday(this, holidays[i], null, false);
-        if (d) { delete(moment.fn.holidays[d]); }
+        if (d) { delete(moment.holidays[d]); }
       }
     }
   };
