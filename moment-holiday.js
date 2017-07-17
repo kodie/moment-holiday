@@ -279,15 +279,13 @@
         if (!h.hasOwnProperty(hd)) { continue; }
         if (this.isSame(h[hd], 'day')) { return true; }
       }
+    } else {
+      var h = getAllHolidays(this, adjust);
 
-      return false;
-    }
-
-    var h = getAllHolidays(this, adjust);
-
-    for (var hd in h) {
-      if (!h.hasOwnProperty(hd)) { continue; }
-      if (this.isSame(h[hd], 'day')) { return hd; }
+      for (var hd in h) {
+        if (!h.hasOwnProperty(hd)) { continue; }
+        if (this.isSame(h[hd], 'day')) { return hd; }
+      }
     }
 
     return false;
