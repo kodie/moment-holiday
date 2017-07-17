@@ -268,7 +268,21 @@
     return this.holiday(holidays, adjust);
   };
 
-  moment.fn.isHoliday = function(adjust) {
+  moment.fn.isHoliday = function(holidays, adjust) {
+    if (holidays) {
+      if (holidays.constructor !== Array) { holidays = [holidays]; }
+
+      var h = this.holiday(holidays, adjust);
+      if (!h) { return false; }
+
+      for (var hd in h) {
+        if (!h.hasOwnProperty(hd)) { continue; }
+        if (this.isSame(h[hd], 'day')) { return true; }
+      }
+
+      return false;
+    }
+
     var h = getAllHolidays(this, adjust);
 
     for (var hd in h) {

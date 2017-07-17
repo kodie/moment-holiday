@@ -45,22 +45,27 @@ test('isHoliday_2', function(t){
 });
 
 test('isHoliday_3', function(t){
-  var w = moment('2018-11-12').isHoliday(true);
+  var w = moment('2018-11-12').isHoliday(null, true);
   t.is(w, "Veteran's Day");
+});
+
+test('isHoliday_4', function(t){
+  var w = moment('2018-03-17').isHoliday('St Paddys Day');
+  t.true(w);
 });
 
 test('previousHoliday_1', function(t){
   var w = moment('2002-06-15').previousHoliday(6);
   t.is(w.constructor, Array);
   t.is(w.length, 6);
-  t.is(w[4].isHoliday(), "Valentine's Day");
+  t.true(w[4].isHoliday("Valentine's Day"));
 });
 
 test('previousHoliday_2', function(t){
   var w = moment('2012-02-06').previousHolidays(7, true);
   t.is(w.constructor, Array);
   t.is(w.length, 7);
-  t.is(w[2].isHoliday(true), "New Year's Eve");
+  t.true(w[2].isHoliday("New Year's Eve", true));
 });
 
 test('nextHoliday_1', function(t){
@@ -74,7 +79,7 @@ test('nextHoliday_2', function(t){
   var w = moment('2011-11-02').nextHoliday(8, true);
   t.is(w.constructor, Array);
   t.is(w.length, 8);
-  t.is(w[6].isHoliday(true), "New Year's Day");
+  t.true(w[6].isHoliday("New Year's Day", true));
 });
 
 test('holidaysBetween_1', function(t){

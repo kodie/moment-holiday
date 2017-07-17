@@ -78,14 +78,15 @@ moment().holidays();
 
 ### isHoliday
 
-Returns the name of the holiday if the given date is in fact a holiday or `false` if it isn't.
+Returns the name of the holiday (or `true` if `holidays` parameter is used) if the given date is in fact a holiday or `false` if it isn't.
 
 #### Use
 ```javascript
-moment().isHoliday(adjust);
+moment().isHoliday(holidays, adjust);
 ```
 
 #### Parameters
+* **holidays** - Holidays to check for. Will cause function to return `true` if there is a match. Can be a string to compare with a single holiday or an array for multiple. Defaults to all holidays.
 * **adjust** - See [global parameters](#global-parameters).
 
 #### Examples
@@ -96,10 +97,13 @@ moment('2017-12-25').isHoliday();
 moment('2005-03-15').isHoliday();
 //false
 
+moment('2009-10-31').isHoliday('Halloween');
+//true
+
 moment('2017-12-31').isHoliday();
 //New Year's Eve
 
-moment('2017-12-31').isHoliday(true);
+moment('2017-12-31').isHoliday(null, true);
 //false
 ```
 
