@@ -261,7 +261,7 @@ You can add and remove holidays by using the following helper functions:
 ```javascript
 moment().modifyHolidays.set(['New Years Day', 'Memorial Day', 'Thanksgiving']);
 
-moment().holiday(); // Returns all holidays
+moment().holidays(); // Returns all holidays
 //{ 'New Year\'s Day': moment("2017-01-01T00:00:00.000"),
 //  'Memorial Day': moment("2017-05-29T00:00:00.000"),
 //  'Thanksgiving Day': moment("2017-11-23T00:00:00.000") }
@@ -277,7 +277,7 @@ moment().modifyHolidays.set({
   }
 });
 
-moment().holiday(); // Returns all holidays
+moment().holidays(); // Returns all holidays
 //{ 'My Birthday': moment("2017-11-17T00:00:00.000"),
 //  'Last Friday of the year': moment("2017-12-29T00:00:00.000") }
 ```
