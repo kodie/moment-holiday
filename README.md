@@ -32,10 +32,17 @@ bower install --save moment-holiday
 
 ## Functions
 
-### holiday(holidays, adjust)
-*or `holidays(holidays, adjust)`*
+### holiday
+*or `holidays`*
 
 Searches for holiday(s) by keywords. Returns a single moment object, an object containing moment objects with the holiday names as keys, or `false` if no holidays were found.
+
+#### Use
+```javascript
+moment().holiday(holidays, adjust);
+//or
+moment().holidays(holidays, adjust);
+```
 
 #### Parameters
 * **holidays** - The holiday(s) to search for. Can be a string to search for a single holiday or an array to search for multiple. Defaults to all holidays.
@@ -69,9 +76,14 @@ moment().holidays();
 //Returns all holidays
 ```
 
-### isHoliday(adjust)
+### isHoliday
 
 Returns the name of the holiday if the given date is in fact a holiday or `false` if it isn't.
+
+#### Use
+```javascript
+moment().isHoliday(adjust);
+```
 
 #### Parameters
 * **adjust** - See [global parameters](#global-parameters).
@@ -91,10 +103,17 @@ moment('2017-12-31').isHoliday(true);
 //false
 ```
 
-### previousHoliday(count, adjust)
-*or `previousHolidays(count, adjust)`*
+### previousHoliday
+*or `previousHolidays`*
 
 Returns an array containing the previous holidays before the given date.
+
+#### Use
+```javascript
+moment().previousHoliday(count, adjust);
+//or
+moment().previousHolidays(count, adjust);
+```
 
 #### Parameters
 * **count** - The number of previous holidays to fetch. Defaults to `1`.
@@ -120,10 +139,17 @@ moment('2001-02-14').previousHolidays(5, true);
 //  moment("2000-11-23T00:00:00.000") ]
 ```
 
-### nextHoliday(count, adjust)
-*or `nextHolidays(count, adjust)`*
+### nextHoliday
+*or `nextHolidays`*
 
 Returns an array containing the next holidays after the given date.
+
+#### Use
+```javascript
+moment().nextHoliday(count, adjust);
+//or
+moment().nextHolidays(count, adjust);
+```
 
 #### Parameters
 * **count** - The number of upcoming holidays to fetch. Defaults to `1`.
@@ -149,8 +175,13 @@ moment('2010-05-23').nextHolidays(5, true);
 //  moment("2010-10-11T00:00:00.000") ]
 ```
 
-### holidaysBetween(date, adjust)
+### holidaysBetween
 Returns an array containing the holidays between the given date and the `date` parameter or `false` if no dates were found.
+
+#### Use
+```javascript
+moment().holidaysBetween(date, adjust);
+```
 
 #### Parameters
 * **date** - The end date range for holidays to get. Can be any string that moment accepts or a moment object. Defaults to today.
