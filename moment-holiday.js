@@ -236,6 +236,7 @@
     }
 
     if (!w.length) { return false; }
+    if (w.length === 1) { return w[0]; }
 
     return w;
   };

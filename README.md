@@ -110,7 +110,7 @@ moment('2017-12-31').isHoliday(null, true);
 ### previousHoliday
 *or `previousHolidays`*
 
-Returns an array containing the previous holidays before the given date.
+Returns an array (or a moment object if `count` is set to `1`) containing the previous holidays before the given date.
 
 #### Use
 ```javascript
@@ -126,7 +126,7 @@ moment().previousHolidays(count, adjust);
 #### Examples
 ```javascript
 moment().previousHoliday();
-//[ moment("2017-07-04T00:00:00.000") ]
+//moment("2017-07-04T00:00:00.000")
 
 moment('2001-02-14').previousHolidays(5);
 //[ moment("2001-01-15T00:00:00.000"),
@@ -146,7 +146,7 @@ moment('2001-02-14').previousHolidays(5, true);
 ### nextHoliday
 *or `nextHolidays`*
 
-Returns an array containing the next holidays after the given date.
+Returns an array (or a moment object if `count` is set to `1`) containing the next holidays after the given date.
 
 #### Use
 ```javascript
@@ -162,7 +162,7 @@ moment().nextHolidays(count, adjust);
 #### Examples
 ```javascript
 moment().nextHoliday();
-//[ moment("2017-09-04T00:00:00.000") ]
+//moment("2017-09-04T00:00:00.000")
 
 moment('2010-05-23').nextHolidays(5);
 //[ moment("2010-05-31T00:00:00.000"),

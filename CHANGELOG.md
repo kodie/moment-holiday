@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [Unreleased]
 
 
+## 1.1.1 - 2017-07-17
+## Changed
+- `previousHoliday` and `nextHoliday` functions will return a single moment object if `count` is set to `1`.
+
+
 ## 1.1.0 - 2017-07-17
 ### Added
 - `previousHoliday` and `nextHoliday` functions.
@@ -23,4 +28,5 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Initial release.
 
 [Unreleased]: https://github.com/kodie/moment-holiday/compare/v1.0.0...HEAD
+[1.1.1]: https://github.com/kodie/moment-holiday/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/kodie/moment-holiday/compare/v1.0.0...v1.1.0
