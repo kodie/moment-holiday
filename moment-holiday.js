@@ -296,7 +296,7 @@
   };
 
   moment.fn.holidaysBetween = function(date, adjust) {
-    if (!date) { date = new Date; }
+    if (!date) { date = new Date(); }
     date = moment(date).subtract(1, 'day');
 
     var h = getAllHolidays(this, adjust);
