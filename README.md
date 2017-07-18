@@ -254,6 +254,8 @@ The following holidays are built-in:
 * Christmas Day
 * New Year's Eve
 
+You can add Easter Sunday and Good Friday by installing the [moment-holiday-easter](https://github.com/kodie/moment-holiday-easter) plugin.
+
 ### Modifying Holidays
 You can add and remove holidays by using the following helper functions:
 
