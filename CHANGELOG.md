@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [Unreleased]
 
 
-## [1.3.0] - TBA
+## [1.3.0] - 2017-07-19
 ### Added
 - Support for holidays that span multiple days.
 - Support for "The [Weekday] on or before/after [Day]".
