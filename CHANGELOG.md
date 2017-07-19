@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [Unreleased]
 
 
+## [1.3.1] - 2017-07-19
+### Changed
+- Fixed bug with Labor Day keywords.
+
+
 ## [1.3.0] - 2017-07-19
 ### Added
 - Support for holidays that span multiple days.
@@ -47,7 +52,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Initial release.
 
 [Unreleased]: https://github.com/kodie/moment-holiday/compare/v1.0.0...HEAD
-[1.3.0]: https://github.com/kodie/moment-holiday/compare/v1.2.1...v1.3.0
+[1.3.1]: https://github.com/kodie/moment-holiday/compare/v1.3.0...v1.3.1
+[1.3.0]: https://github.com/kodie/moment-holiday/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/kodie/moment-holiday/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/kodie/moment-holiday/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/kodie/moment-holiday/compare/v1.0.0...v1.1.0

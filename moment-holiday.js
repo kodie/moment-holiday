@@ -1,5 +1,5 @@
 //! moment-holiday.js
-//! version : 1.3.0
+//! version : 1.3.1
 //! author : Kodie Grantham
 //! license : MIT
 //! https://github.com/kodie/moment-holiday
@@ -52,7 +52,7 @@
     },
     "Labor Day": {
       date: '9/(1,1)',
-      keywords_y: ['labor', 'labour']
+      keywords: ['labor', 'labour']
     },
     "Columbus Day": {
       date: '10/(1,2)',
