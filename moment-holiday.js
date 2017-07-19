@@ -1,13 +1,17 @@
 //! moment-holiday.js
-//! version : 1.2.0
+//! version : 1.3.0
 //! author : Kodie Grantham
 //! license : MIT
-//! github.com/kodie/moment-holiday
+//! https://github.com/kodie/moment-holiday
 
 (function() {
   var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? require('moment') : this.moment;
 
-  moment.holidays = {
+  var holidayObject = {};
+
+  moment.holidays = {};
+
+  moment.holidays.us = {
     "New Year's Day": {
       date: '1/1',
       keywords: ['new'],
@@ -48,7 +52,7 @@
     },
     "Labor Day": {
       date: '9/(1,1)',
-      keywords_y: ['labor']
+      keywords_y: ['labor', 'labour']
     },
     "Columbus Day": {
       date: '10/(1,2)',
@@ -92,52 +96,125 @@
   var parserExtensions = [];
 
   var parseHoliday = function(self, date, adjust) {
-    var m;
+    var days = [];
 
     for (var i = 0; i < parserExtensions.length; i++) {
-      if (pe = parserExtensions[i](self, date)) { m = pe; }
+      var pe = parserExtensions[i](self, date);
+      if (pe === false) { return false; }
+      if (pe) { days = pe; }
     }
 
-    if (!moment.isMoment(m)) {
-      m = moment(self);
-      date = date.split('/');
-      m.month((parseInt(date[0]) - 1));
+    if (!moment.isMoment(days) && !days.length) {
+      var range = false;
+      var dates = date.split('|');
 
-      if (date[1].charAt(0) == '(') {
-        var w = date[1].slice(1, -1).split(',');
-        var wd = parseInt(w[0]);
-        var dt = parseInt(w[1]);
-        var d = moment(m).startOf('month');
-        var limit = (moment(m).endOf('month').diff(d, 'days') + 1);
-        var days = [];
+      if (dates.length > 1) { range = true; }
+      if (dates.length > 2) { dates = [dates[0], dates[1]]; }
 
-        for (var i = 0; i < limit; i++) {
-          if (d.day() === wd) { days.push(moment(d)); }
-          d.add(1, 'day');
+      for (var i = 0; i < dates.length; i++) {
+        var m = moment(self);
+        var ds = dates[i].split('/');
+
+        if (ds.length === 1 || (ds.length === 2 && ds[1].charAt(0) !== '(' && ds[1].length === 4)) {
+          var td = dates[i];
+          i = -1;
+          dates = [];
+          for (var ii = 1; ii < 13; ii++) { dates.push(ii + '/' + td); }
+          continue;
         }
 
-        if (dt < 0) {
-          m = days[days.length + dt];
+        if (ds.length > 2) { m.year(parseInt(ds[2])); }
+
+        m.month((parseInt(ds[0]) - 1));
+
+        if (ds[1].charAt(0) === '(') {
+          var w = ds[1].slice(1, -1).split(',');
+          var wd = parseInt(w[0]);
+          var dt = parseInt(w[1]);
+          var d = moment(m).startOf('month');
+          var limit = (moment(m).endOf('month').diff(d, 'days') + 1);
+          var wds = [];
+
+          if (w[1] && w[1].charAt(0) === '[') {
+            var forward = true;
+            dt = parseInt(w[1].slice(1, -1));
+
+            if (dt < 0) {
+              forward = false;
+              dt = parseInt(w[1].slice(2, -1));
+            }
+
+            d = moment(m).date(dt);
+
+            for (var wi = 0; wi < 6; wi++) {
+              if (d.day() === wd) { days.push(moment(d)); break; }
+
+              if (forward) {
+                d.add(1, 'day');
+              } else {
+                d.subtract(1, 'day');
+              }
+            }
+
+            continue;
+          }
+
+          for (var ai = 0; ai < limit; ai++) {
+            if (d.day() === wd) { wds.push(moment(d)); }
+            d.add(1, 'day');
+          }
+
+          if (!dt) {
+            days = days.concat(wds);
+            continue;
+          } else if (dt < 0) {
+            m = wds[wds.length + dt];
+          } else {
+            m = wds[dt - 1];
+          }
+
+          days.push(m);
         } else {
-          m = days[dt - 1];
+          days.push(m.date(ds[1]));
         }
-      } else {
-        m.date(date[1]);
+      }
+
+      if (range && days.length > 1) {
+        var diff = days[1].diff(days[0], 'days');
+
+        if (diff > 1) {
+          var di = moment(days[0]);
+          days = [days[0]];
+
+          for (var i = 0; i < diff; i++) {
+            di.add(1, 'day');
+            days.push(moment(di));
+          }
+        }
       }
     }
 
-    if (!moment.isMoment(m)) { return false; }
+    days = arrayify(days);
 
-    if (adjust) {
-      if (m.day() == 0) { m.add(1, 'day'); }
-      if (m.day() == 6) { m.subtract(1, 'day'); }
+    for (var i = 0; i < days.length; i++) {
+      if (!moment.isMoment(days[i])) { delete(days[i]); continue; }
+
+      if (adjust) {
+        if (days[i].day() === 0) { days[i] = days[i].add(1, 'day'); }
+        if (days[i].day() === 6) { days[i] = days[i].subtract(1, 'day'); }
+      }
+
+      days[i] = days[i].startOf('day');
     }
 
-    return m.startOf('day');
+    if (!days.length) { return false; }
+    if (days.length === 1) { return days[0]; }
+
+    return days;
   };
 
   var findHoliday = function(self, holiday, adjust, parse) {
-    var h = moment.holidays;
+    var h = holidayObject;
     var pt = {};
     var wn = [];
     var obj = {};
@@ -195,7 +272,7 @@
   };
 
   var getAllHolidays = function(self, adjust) {
-    var h = moment.holidays;
+    var h = holidayObject;
     var d = {};
 
     for (var hd in h) {
@@ -234,12 +311,19 @@
         if (!Object.keys(h).length) { b = true; break; }
 
         for (var hd in h) {
-          if (d.isSame(h[hd], 'day')) {
-            w.push(h[hd]);
-            l = moment(d);
-            b = true;
-            break;
+          var b2 = false;
+          var ha = arrayify(h[hd]);
+
+          for (var hi = 0; hi < ha.length; hi++) {
+            if (d.isSame(ha[hi], 'day')) {
+              w.push(ha[hi]);
+              l = moment(d);
+              b2 = true;
+              break;
+            }
           }
+
+          if (b2) { b = true; break; }
         }
 
         if (b) { break; }
@@ -252,8 +336,13 @@
     return w;
   };
 
+  var arrayify = function(arr) {
+    if (arr && arr.constructor !== Array) { return [arr]; }
+    return arr;
+  };
+
   moment.fn.holiday = function(holidays, adjust) {
-    var h = moment.holidays;
+    var h = holidayObject;
     var d = {};
     var single = false;
 
@@ -271,7 +360,7 @@
     var dKeys = Object.keys(d);
 
     if (!dKeys.length) { return false; }
-    if (single) { return d[dKeys[0]]; }
+    if (dKeys.length === 1 && single) { return d[dKeys[0]]; }
 
     return d;
   };
@@ -281,22 +370,32 @@
   };
 
   moment.fn.isHoliday = function(holidays, adjust) {
+    var h, returnTitle;
+
     if (holidays) {
-      if (holidays.constructor !== Array) { holidays = [holidays]; }
-
-      var h = this.holiday(holidays, adjust);
-      if (!h) { return false; }
-
-      for (var hd in h) {
-        if (!h.hasOwnProperty(hd)) { continue; }
-        if (this.isSame(h[hd], 'day')) { return true; }
-      }
+      holidays = arrayify(holidays);
+      h = this.holiday(holidays, adjust);
+      returnTitle = false;
     } else {
-      var h = getAllHolidays(this, adjust);
+      h = getAllHolidays(this, adjust);
+      returnTitle = true;
+    }
 
-      for (var hd in h) {
-        if (!h.hasOwnProperty(hd)) { continue; }
-        if (this.isSame(h[hd], 'day')) { return hd; }
+    if (!h) { return false; }
+
+    for (var hd in h) {
+      if (!h.hasOwnProperty(hd)) { continue; }
+
+      var ha = arrayify(h[hd]);
+
+      for (var hi = 0; hi < ha.length; hi++) {
+        if (this.isSame(ha[hi], 'day')) {
+          if (returnTitle) {
+            return hd;
+          } else {
+            return true;
+          }
+        }
       }
     }
 
@@ -339,10 +438,18 @@
       if (!Object.keys(h).length) { break; }
 
       for (var hd in h) {
-        if (d.isSame(h[hd], 'day')) {
-          w.push(h[hd]);
-          break;
+        var b = false;
+        var ha = arrayify(h[hd]);
+
+        for (var hi = 0; hi < ha.length; hi++) {
+          if (d.isSame(ha[hi], 'day')) {
+            w.push(ha[hi]);
+            b = true;
+            break;
+          }
         }
+
+        if (b) { break; }
       }
     }
 
@@ -351,7 +458,7 @@
     return w;
   };
 
-  moment.fn.modifyHolidays = {
+  moment.modifyHolidays = {
     set: function(holidays) {
       if (holidays.constructor === Array) {
         var hs = [];
@@ -361,34 +468,64 @@
           if (d) { hs.push(d); }
         }
 
-        for (var hd in moment.holidays) {
-          if (!moment.holidays.hasOwnProperty(hd)) { continue; }
-          if (hs.indexOf(hd) === -1) { delete(moment.holidays[hd]); }
+        for (var hd in holidayObject) {
+          if (!holidayObject.hasOwnProperty(hd)) { continue; }
+          if (hs.indexOf(hd) === -1) { delete(holidayObject[hd]); }
         }
+      } else if (typeof holidays === 'string') {
+        var locale = holidays.toLowerCase();
+
+        if (!moment.holidays[locale]) {
+          try {
+            require('./locale/' + locale);
+          } catch(e) { }
+        }
+
+        if (moment.holidays[locale]) { holidayObject = moment.holidays[locale]; }
       } else {
-        moment.holidays = holidays;
+        holidayObject = holidays;
       }
+
+      return this;
     },
 
     add: function(holidays) {
-      moment.holidays = Object.assign({}, moment.holidays, holidays);
+      if (typeof holidays === 'string') {
+        var locale = holidays.toLowerCase();
+        holidays = {};
+
+        if (!moment.holidays[locale]) {
+          try {
+            require('./locale/' + locale);
+          } catch(e) { }
+        }
+
+        if (moment.holidays[locale]) { holidays = moment.holidays[locale]; }
+      }
+
+      holidayObject = Object.assign({}, holidayObject, holidays);
+
+      return this;
     },
 
     remove: function(holidays) {
-      if (holidays.constructor !== Array) { holidays = [holidays]; }
+      holidays = arrayify(holidays);
 
       for (i = 0; i < holidays.length; i++) {
         var d = findHoliday(this, holidays[i], null, false);
-        if (d) { delete(moment.holidays[d]); }
+        if (d) { delete(holidayObject[d]); }
       }
+
+      return this;
     },
 
     extendParser: function(func) {
       parserExtensions.push(func);
+      return this;
     }
   };
 
-  if ((typeof module !== 'undefined' && module !== null ? module.exports : void 0) != null) {
-    module.exports = moment;
-  }
+  moment.modifyHolidays.set('US').add('Easter');
+
+  if ((typeof module !== 'undefined' && module !== null ? module.exports : void 0) != null) { module.exports = moment; }
 }).call(this);

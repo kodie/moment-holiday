@@ -1,6 +1,6 @@
 {
   "name": "moment-holiday",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "A Moment.js plugin for handling holidays.",
   "keywords": [
     "moment",
@@ -24,13 +24,17 @@
   "homepage": "https://github.com/kodie/moment-holiday",
   "license": "MIT",
   "main": "moment-holiday.js",
+  "files": [
+    "locale/"
+  ],
   "dependencies": {
     "moment": ">=2.0.0"
   },
   "devDependencies": {
-    "ava": ">=0.10.0"
+    "ava": ">=0.10.0",
+    "jshint": ">=2.9.1"
   },
   "scripts": {
-    "test": "ava"
+    "test": "./node_modules/.bin/jshint *.js **/*.js && ava"
   }
 }

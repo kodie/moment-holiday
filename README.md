@@ -254,21 +254,23 @@ The following holidays are built-in:
 * Christmas Day
 * New Year's Eve
 
-You can add Easter Sunday and Good Friday by installing the [moment-holiday-easter](https://github.com/kodie/moment-holiday-easter) plugin.
+Easter Sunday and Good Friday are also automatically included if you are using Node. (You can still easily add them in even when not using Node. See: [Modifying Holidays](#modifying-holidays))
 
 ### Modifying Holidays
 You can add and remove holidays by using the following helper functions:
 
+*Note: Helper functions can be chained.*
+
 #### modifyHolidays.set
 ```javascript
-moment().modifyHolidays.set(['New Years Day', 'Memorial Day', 'Thanksgiving']);
+moment.modifyHolidays.set(['New Years Day', 'Memorial Day', 'Thanksgiving']);
 
 moment().holidays(); // Returns all holidays
 //{ 'New Year\'s Day': moment("2017-01-01T00:00:00.000"),
 //  'Memorial Day': moment("2017-05-29T00:00:00.000"),
 //  'Thanksgiving Day': moment("2017-11-23T00:00:00.000") }
 
-moment().modifyHolidays.set({
+moment.modifyHolidays.set({
   "My Birthday": {
     date: '11/17',
     keywords: ['my', 'birthday']
@@ -286,7 +288,7 @@ moment().holidays(); // Returns all holidays
 
 #### modifyHolidays.add
 ```javascript
-moment().modifyHolidays.add({
+moment.modifyHolidays.add({
   "Inauguration Day": {
     date: '1/20',
     keywords_y: ['inauguration']
@@ -299,25 +301,104 @@ moment().holiday('Inauguration');
 
 #### modifyHolidays.remove
 ```javascript
-moment().modifyHolidays.remove('Christmas');
+moment.modifyHolidays.remove('Christmas');
 
-moment().modifyHolidays.remove(['Dad Day', 'Mom Day', 'Saint Paddys Day']);
+moment.modifyHolidays.remove(['Dad Day', 'Mom Day', 'Saint Paddys Day']);
 ```
 
+#### Adding/Setting Locales
+You can also use these functions to set or add holidays from an available locale file:
+
+```javascript
+moment.modifyHolidays.set('Canada').add('Easter');
+moment('2001-12-26').isHoliday('Boxing Day');
+//true
+
+moment.modifyHolidays.add('Easter').remove('Good Friday');
+moment().holiday(['Easter Sunday', 'Good Friday']);
+//{ 'Easter Sunday': moment("2017-04-16T00:00:00.000") }
+```
+
+*Note: If you're not using Node (or anything that doesn't support the `require` function), you'll need to make sure that you include the locale file(s) that you're trying to use. For example:*
+
+```html
+<script src="./moment-holiday/locale/canada.js"></script>
+<script src="./moment-holiday/locale/easter.js"></script>
+<script>
+  moment.modifyHolidays.set('Canada').add('Easter');
+  moment('2001-12-26').isHoliday('Boxing Day');
+  //true
+</script>
+```
+
+##### Holiday Objects
 Holiday objects accept the following options:
 
-* **date** *(Required)* - The date of the holiday in the format of `Month/Day`. A day wrapped in parentheses means a specific day of the week and expects two values separated by a comma. The first part is the day of the week as recognized by [moment().day()](https://momentjs.com/docs/#/get-set/day/) (0=Sunday, 6=Saturday). The second part is the 1-indexed index of that day of week.
+* **date** *(Required)* - The date of the holiday in the format of `Month/Day`. A day wrapped in parentheses `()` means a specific day of the week and expects two values separated by a comma `,`. The first part is the day of the week as recognized by [moment().day()](https://momentjs.com/docs/#/get-set/day/) (0=Sunday, 6=Saturday). The second part (optional) is the 1-indexed index of that day of week unless separated by brackets `[]` which means "The weekday on or before/after this day". Two dates separated by a vertical bar `|` means a date range. You may also specific a 4-digit year by adding an additional `/` after the day.
 
   Examples:
   * `5/20` - The 20th of May.
   * `7/(1,3)` - The third Monday of July.
   * `3/(4,-1)` - The last Thursday of March.
+  * `6/(2,[16])` - The Tuesday on or after the 16th of June.
+  * `11/(5,[-9])` - The Friday on or before the 9th of November.
+  * `8/21|9/4` - The 21st of August through the 4th of September.
+  * `11` - The 11th of every month of the year.
+  * `(0)` - Every Sunday of the year.
+  * `10/(3)` - Every Wednesday in October.
+  * `12/7/2014` - December 7th, 2014.
+  * `(6)/2014` - Every Saturday of the year 2014.
+  * `2/(1,1)|5/(5,-1)` - The first Monday of February through the last Friday of May.
+  * `4/(3,[-11])|5/(0,1)` - The Wednesday on or before the 11th of March through the first Sunday of May.
 
 * **keywords** - An array of optional keywords.
 * **keywords_y** - An array of required keywords.
 * **keywords_n** - An array of banned keywords.
 
 View the source of [moment-holiday.js](moment-holiday.js) for a better look at how the keywords work.
+
+#### modifyHolidays.extendParser
+This is a handy little function that allows you to extend the functionality of the date parser. It accepts a single function as a variable that gets passed a moment object and the date string as variables. It can return a single moment object, an array of moment objects, `false` to bail on parsing, or nothing at all to continue with the default parser.
+
+Example:
+```javascript
+moment.modifyHolidays.add({
+  "Friday The Thirteenth": {
+    date: 'fridaythethirteenth',
+    keywords_y: ['friday'],
+    keywords: ['thirteen', '13', 'the']
+  }
+}).extendParser(function(m, date){
+  if (date === 'fridaythethirteenth') {
+    var days = [];
+
+    for (i = 0; i < 12; i++) {
+      var d = moment(m).month(i).date(13);
+      if (d.day() === 5) { days.push(moment(d)); }
+    }
+
+    if (!days.length) { return false; }
+    return days;
+  }
+});
+
+moment().holiday('Friday 13th');
+//[ moment("2017-01-13T00:00:00.000"),
+//  moment("2017-10-13T00:00:00.000") ]
+```
+
+You can also see how we take advantage of this by viewing the source of [locale/easter.js](locale/easter.js).
+
+## Locales
+Locale files are simply files that add holidays and special holiday parsing functionality for other countries. They are all located in the `locale/` folder.
+
+Pull Requests will be accepted (and encouraged!) but must meet the following guidelines:
+* Must contain a `moment.holidays.[locale]` object matching the filename all in lowercase.
+  * Example: `locale/japan.js` would need to have `moment.holidays.japan` in it.
+  * Invalid: `local/Japan.js` or `moment.holidays.Japan`
+* Must pass `npm test`.
+
+See the source of [locale/canada.js](locale/canada.js) and [locale/easter.js](locale/easter.js) for good examples of locale files.
 
 ## License
 MIT. See the License file for more info.
