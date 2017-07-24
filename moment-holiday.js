@@ -1,5 +1,5 @@
 //! moment-holiday.js
-//! version : 1.4.0
+//! version : 1.4.1
 //! author : Kodie Grantham
 //! license : MIT
 //! https://github.com/kodie/moment-holiday
@@ -242,45 +242,49 @@
 
     h = holidayObj || moment.holidays.active;
 
-    for (var hd in h) {
-      if (!h.hasOwnProperty(hd)) { continue; }
+    if (h.hasOwnProperty(holiday)) {
+      wn.push(holiday);
+    } else {
+      for (var hd in h) {
+        if (!h.hasOwnProperty(hd)) { continue; }
 
-      pt[hd] = 0;
+        pt[hd] = 0;
 
-      if (h[hd].keywords_n) {
-        var matchesN = keywordMatches(holiday, h[hd].keywords_n);
-        if (matchesN.length) {
-          pt[hd] = 0;
-          continue;
+        if (h[hd].keywords_n) {
+          var matchesN = keywordMatches(holiday, h[hd].keywords_n);
+          if (matchesN.length) {
+            pt[hd] = 0;
+            continue;
+          }
+        }
+
+        if (h[hd].keywords_y) {
+          var matchesY = keywordMatches(holiday, h[hd].keywords_y);
+          if (matchesY && matchesY.length === h[hd].keywords_y.length) {
+            pt[hd] += matchesY.length;
+          } else {
+            pt[hd] = 0;
+            continue;
+          }
+        }
+
+        if (h[hd].keywords) {
+          var matches = keywordMatches(holiday, h[hd].keywords);
+          if (matches) {
+            pt[hd] += matches.length;
+          } else {
+            continue;
+          }
         }
       }
 
-      if (h[hd].keywords_y) {
-        var matchesY = keywordMatches(holiday, h[hd].keywords_y);
-        if (matchesY && matchesY.length === h[hd].keywords_y.length) {
-          pt[hd] += matchesY.length;
-        } else {
-          pt[hd] = 0;
-          continue;
-        }
+      //console.log(pt); // Display scores
+
+      for (var w in pt) {
+        if (!pt[w] || !pt.hasOwnProperty(w)) { continue; }
+        if (!wn.length || pt[w] === pt[wn[0]]) { wn.push(w); continue; }
+        if (pt[w] > pt[wn[0]]) { wn = [w]; continue; }
       }
-
-      if (h[hd].keywords) {
-        var matches = keywordMatches(holiday, h[hd].keywords);
-        if (matches) {
-          pt[hd] += matches.length;
-        } else {
-          continue;
-        }
-      }
-    }
-
-    //console.log(pt); // Display scores
-
-    for (var w in pt) {
-      if (!pt[w] || !pt.hasOwnProperty(w)) { continue; }
-      if (!wn.length || pt[w] === pt[wn[0]]) { wn.push(w); continue; }
-      if (pt[w] > pt[wn[0]]) { wn = [w]; continue; }
     }
 
     if (!wn.length || wn.length > 1) { return false; }
@@ -437,8 +441,8 @@
     return arr;
   };
 
-  var merge = function(...sources) {
-    return Object.assign({}, ...sources);
+  var merge = function(o1, o2) {
+    return Object.assign({}, o1, o2);
   };
 
   moment.fn.holiday = function(holidays, adjust) {

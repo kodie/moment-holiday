@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [Unreleased]
 
 
+## [1.4.1] - 2017-07-24
+### Changed
+- Changed internal function `merge` dynamic parameters to static ones for older node version support.
+- Internal function `findHoliday` will now skip keyword search if the string matches the holiday name exactly.
+
+
 ## [1.4.0] - 2017-07-24
 ### Added
 - Ash Wednesday, Lent, Holy Saturday, Easter Monday, Ascension Day, Pentecost Sunday, Whit Monday, and Corpus Christi to Easter locale.
@@ -73,6 +79,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Initial release.
 
 [Unreleased]: https://github.com/kodie/moment-holiday/compare/v1.0.0...HEAD
+[1.4.1]: https://github.com/kodie/moment-holiday/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/kodie/moment-holiday/compare/v1.3.1...v1.4.0
 [1.3.1]: https://github.com/kodie/moment-holiday/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/kodie/moment-holiday/compare/v1.2.0...v1.3.0
