@@ -1,5 +1,5 @@
 //! moment-holiday.js
-//! version : 1.3.1
+//! version : 1.4.0
 //! author : Kodie Grantham
 //! license : MIT
 //! https://github.com/kodie/moment-holiday
@@ -7,9 +7,9 @@
 (function() {
   var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? require('moment') : this.moment;
 
-  var holidayObject = {};
-
   moment.holidays = {};
+  moment.holidays.active = {};
+  moment.holidays.active_last = {};
 
   moment.holidays.us = {
     "New Year's Day": {
@@ -20,7 +20,7 @@
     },
     "Martin Luther King Jr. Day": {
       date: '1/(1,3)',
-      keywords: ['martin', 'luther', 'king', 'jr', 'mlk']
+      keywords: ['martin', 'luther', 'king', 'jr[\\s\\.]', 'mlk']
     },
     "Valentine's Day": {
       date: '2/14',
@@ -32,7 +32,16 @@
     },
     "Saint Patrick's Day": {
       date: '3/17',
-      keywords: ['patrick', 'saint', 'paddy', 'patty']
+      keywords: ['patrick', 'saint', 'st[\\s\\.]', 'paddy', 'patty']
+    },
+    "Good Friday": {
+      date: 'goodfriday',
+      keywords_y: ['good', 'friday']
+    },
+    "Easter Sunday": {
+      date: 'easter',
+      keywords_y: ['easter'],
+      keywords: ['sunday']
     },
     "Memorial Day": {
       date: '5/(1,-1)',
@@ -78,12 +87,12 @@
     },
     "Christmas Eve": {
       date: '12/24',
-      keywords: ['christmas', 'christ', 'xmas', 'x-mas'],
+      keywords: ['christmas', 'christ', 'x-?mas'],
       keywords_y: ['eve']
     },
     "Christmas Day": {
       date: '12/25',
-      keywords: ['christmas', 'christ', 'xmas', 'x-mas'],
+      keywords: ['christmas', 'christ', 'x-?mas'],
       keywords_n: ['eve']
     },
     "New Year's Eve": {
@@ -100,11 +109,12 @@
 
     for (var i = 0; i < parserExtensions.length; i++) {
       var pe = parserExtensions[i](self, date);
-      if (pe === false) { return false; }
-      if (pe) { days = pe; }
+      if (pe || pe === false) { days = pe; }
     }
 
-    if (!moment.isMoment(days) && !days.length) {
+    if (days === false) { return false; }
+
+    if (!moment.isMoment(days) && !days.length && date.charAt(0).match(/[0-9(]/)) {
       var range = false;
       var dates = date.split('|');
 
@@ -213,24 +223,40 @@
     return days;
   };
 
-  var findHoliday = function(self, holiday, adjust, parse) {
-    var h = holidayObject;
+  var keywordMatches = function(str, kw) {
+    var m = [];
+    kw = arrayify(kw);
+
+    for (var i = 0; i < kw.length; i++) {
+      var f = str.match(new RegExp(kw[i], 'gi'));
+      if (f) { m = m.concat(f); }
+    }
+
+    return m;
+  };
+
+  var findHoliday = function(self, holiday, adjust, parse, holidayObj) {
     var pt = {};
     var wn = [];
     var obj = {};
+
+    h = holidayObj || moment.holidays.active;
 
     for (var hd in h) {
       if (!h.hasOwnProperty(hd)) { continue; }
 
       pt[hd] = 0;
 
-      if (h[hd].keywords_n && new RegExp(h[hd].keywords_n.join('|'), 'gi').test(holiday)) {
-        pt[hd] = 0;
-        continue;
+      if (h[hd].keywords_n) {
+        var matchesN = keywordMatches(holiday, h[hd].keywords_n);
+        if (matchesN.length) {
+          pt[hd] = 0;
+          continue;
+        }
       }
 
       if (h[hd].keywords_y) {
-        var matchesY = holiday.match(new RegExp(h[hd].keywords_y.join('|'), 'gi'));
+        var matchesY = keywordMatches(holiday, h[hd].keywords_y);
         if (matchesY && matchesY.length === h[hd].keywords_y.length) {
           pt[hd] += matchesY.length;
         } else {
@@ -240,7 +266,7 @@
       }
 
       if (h[hd].keywords) {
-        var matches = holiday.match(new RegExp(h[hd].keywords.join('|'), 'gi'));
+        var matches = keywordMatches(holiday, h[hd].keywords);
         if (matches) {
           pt[hd] += matches.length;
         } else {
@@ -248,6 +274,8 @@
         }
       }
     }
+
+    //console.log(pt); // Display scores
 
     for (var w in pt) {
       if (!pt[w] || !pt.hasOwnProperty(w)) { continue; }
@@ -271,8 +299,22 @@
     return false;
   };
 
+  var findHolidays = function(self, holidays, adjust, parse, holidayObj) {
+    var h = {};
+
+    holidays = arrayify(holidays);
+    if (!holidayObj) { holidayObj = moment.holidays.active; }
+
+    for (var i = 0; i < holidays.length; i++) {
+      var find = findHoliday(self, holidays[i], adjust, parse, holidayObj);
+      if (find) { h[find] = holidayObj[find]; }
+    }
+
+    return h;
+  };
+
   var getAllHolidays = function(self, adjust) {
-    var h = holidayObject;
+    var h = moment.holidays.active;
     var d = {};
 
     for (var hd in h) {
@@ -283,6 +325,58 @@
     return d;
   };
 
+  var compileRegions = function(locale, regions) {
+    var h = moment.holidays[locale];
+    var o = {};
+
+    if (h) {
+      for (var i = 0; i < regions.length; i++) {
+        var r = regions[i].toLowerCase();
+        var l = moment.holidays[locale + '/' + r];
+        l = {};
+
+        for (var hd in h) {
+          if (!h.hasOwnProperty(hd)) { continue; }
+
+          var y = h[hd].regions || [];
+          var n = h[hd].regions_n || [];
+
+          if (y.length) { y.join().toLowerCase().split(); }
+          if (n.length) { n.join().toLowerCase().split(); }
+
+          if ((!y.length && !n.length) || (y.length && ~y.indexOf(r)) || (n.length && !~n.indexOf(r))) {
+            l[hd] = h[hd];
+          }
+        }
+
+        if (l) { o = merge(o, l); }
+      }
+    }
+
+    if (!Object.keys(o).length) { return false; }
+
+    return o;
+  };
+
+  var getLocale = function(locale) {
+    regions = locale.split('/');
+    locale = regions[0].toLowerCase();
+    regions.shift();
+
+    if (!moment.holidays[locale]) {
+      try {
+        require('./locale/' + locale);
+      } catch(e) { }
+    }
+
+    if (moment.holidays[locale]) {
+      if (regions.length) { return compileRegions(locale, regions); }
+      return moment.holidays[locale];
+    }
+
+    return false;
+  };
+
   var holidayLoop = function(self, count, forward, adjust) {
     if (!count) { count = 1; }
 
@@ -291,7 +385,7 @@
     var y = self.year();
     var w = [];
 
-    for (i = 0; i < count; i++) {
+    for (var i = 0; i < count; i++) {
       var d = moment(l);
 
       while (true) {
@@ -311,6 +405,8 @@
         if (!Object.keys(h).length) { b = true; break; }
 
         for (var hd in h) {
+          if (!h.hasOwnProperty(hd)) { continue; }
+
           var b2 = false;
           var ha = arrayify(h[hd]);
 
@@ -341,8 +437,12 @@
     return arr;
   };
 
+  var merge = function(...sources) {
+    return Object.assign({}, ...sources);
+  };
+
   moment.fn.holiday = function(holidays, adjust) {
-    var h = holidayObject;
+    var h = moment.holidays.active;
     var d = {};
     var single = false;
 
@@ -353,7 +453,7 @@
       holidays = [holidays];
     }
 
-    for (i = 0; i < holidays.length; i++) {
+    for (var i = 0; i < holidays.length; i++) {
       if (td = findHoliday(this, holidays[i], adjust)) { d = Object.assign({}, d, td); }
     }
 
@@ -370,7 +470,7 @@
   };
 
   moment.fn.isHoliday = function(holidays, adjust) {
-    var h, returnTitle;
+    var h, returnTitle, hs = [];
 
     if (holidays) {
       holidays = arrayify(holidays);
@@ -391,12 +491,17 @@
       for (var hi = 0; hi < ha.length; hi++) {
         if (this.isSame(ha[hi], 'day')) {
           if (returnTitle) {
-            return hd;
+            hs.push(hd);
           } else {
             return true;
           }
         }
       }
+    }
+
+    if (hs.length) {
+      if (hs.length === 1) { return hs[0]; }
+      return hs;
     }
 
     return false;
@@ -427,7 +532,7 @@
     var y = d.year();
     var w = [];
 
-    for (i = 0; i < date.diff(this, 'days'); i++) {
+    for (var i = 0; i < date.diff(this, 'days'); i++) {
       d.add(1, 'day');
 
       if (d.year() !== y) {
@@ -459,51 +564,65 @@
   };
 
   moment.modifyHolidays = {
-    set: function(holidays) {
+    set: function(holidays, specifics) {
+      var newH = {};
+
       if (holidays.constructor === Array) {
         var hs = [];
 
-        for (i = 0; i < holidays.length; i++) {
+        for (var i = 0; i < holidays.length; i++) {
           var d = findHoliday(this, holidays[i], null, false);
           if (d) { hs.push(d); }
         }
 
-        for (var hd in holidayObject) {
-          if (!holidayObject.hasOwnProperty(hd)) { continue; }
-          if (hs.indexOf(hd) === -1) { delete(holidayObject[hd]); }
+        if (hs.length) {
+          newH = merge(moment.holidays.active);
+
+          for (var hd in newH) {
+            if (!newH.hasOwnProperty(hd)) { continue; }
+            if (!~hs.indexOf(hd)) { delete(newH[hd]); }
+          }
         }
       } else if (typeof holidays === 'string') {
-        var locale = holidays.toLowerCase();
+        var locale = getLocale(holidays);
 
-        if (!moment.holidays[locale]) {
-          try {
-            require('./locale/' + locale);
-          } catch(e) { }
+        if (locale) {
+          if (specifics) {
+            newH = findHolidays(this, specifics, null, false, locale);
+          } else {
+            newH = merge(locale);
+          }
         }
-
-        if (moment.holidays[locale]) { holidayObject = moment.holidays[locale]; }
       } else {
-        holidayObject = holidays;
+        newH = holidays;
+      }
+
+      if (Object.keys(newH).length && !Object.is(moment.holidays.active, newH)) {
+        moment.holidays.active_last = merge(moment.holidays.active);
+        moment.holidays.active = newH;
       }
 
       return this;
     },
 
-    add: function(holidays) {
+    add: function(holidays, specifics) {
       if (typeof holidays === 'string') {
-        var locale = holidays.toLowerCase();
+        var locale = getLocale(holidays);
         holidays = {};
 
-        if (!moment.holidays[locale]) {
-          try {
-            require('./locale/' + locale);
-          } catch(e) { }
+        if (locale) {
+          if (specifics) {
+            holidays = findHolidays(this, specifics, null, false, locale);
+          } else {
+            holidays = locale;
+          }
         }
-
-        if (moment.holidays[locale]) { holidays = moment.holidays[locale]; }
       }
 
-      holidayObject = Object.assign({}, holidayObject, holidays);
+      if (Object.keys(holidays).length) {
+        moment.holidays.active_last = merge(moment.holidays.active);
+        moment.holidays.active = merge(moment.holidays.active, holidays);
+      }
 
       return this;
     },
@@ -511,11 +630,25 @@
     remove: function(holidays) {
       holidays = arrayify(holidays);
 
-      for (i = 0; i < holidays.length; i++) {
-        var d = findHoliday(this, holidays[i], null, false);
-        if (d) { delete(holidayObject[d]); }
+      var find = findHolidays(this, holidays, null, false);
+      var newH = merge(moment.holidays.active);
+
+      if (find) {
+        for (var hd in find) { delete(newH[hd]); }
       }
 
+      if (!Object.is(moment.holidays.active, newH)) {
+        moment.holidays.active_last = merge(moment.holidays.active);
+        moment.holidays.active = newH;
+      }
+
+      return this;
+    },
+
+    undo: function() {
+      var c = merge(moment.holidays.active);
+      moment.holidays.active = merge(moment.holidays.active_last);
+      moment.holidays.active_last = c;
       return this;
     },
 
@@ -525,7 +658,7 @@
     }
   };
 
-  moment.modifyHolidays.set('US').add('Easter');
+  moment.modifyHolidays.set('US').add('Easter', ['Easter Sunday', 'Good Friday']);
 
   if ((typeof module !== 'undefined' && module !== null ? module.exports : void 0) != null) { module.exports = moment; }
 }).call(this);

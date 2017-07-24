@@ -78,7 +78,7 @@ moment().holidays();
 
 ### isHoliday
 
-Returns the name of the holiday (or `true` if `holidays` parameter is used) if the given date is in fact a holiday or `false` if it isn't.
+Returns the name of the holiday (or `true` if `holidays` parameter is used) if the given date is in fact a holiday or `false` if it isn't. Will return an array of holiday names if multiple holidays land on that same day.
 
 #### Use
 ```javascript
@@ -105,6 +105,9 @@ moment('2017-12-31').isHoliday();
 
 moment('2017-12-31').isHoliday(null, true);
 //false
+
+moment('2017-04-17').isHoliday(null, true);
+//[ 'Easter Sunday', 'Easter Monday' ]
 ```
 
 ### previousHoliday
@@ -141,6 +144,9 @@ moment('2001-02-14').previousHolidays(5, true);
 //  moment("2000-12-25T00:00:00.000"),
 //  moment("2000-11-24T00:00:00.000"),
 //  moment("2000-11-23T00:00:00.000") ]
+
+moment().previousHoliday().isHoliday();
+//Independence Day
 ```
 
 ### nextHoliday
@@ -177,6 +183,9 @@ moment('2010-05-23').nextHolidays(5, true);
 //  moment("2010-07-05T00:00:00.000"),
 //  moment("2010-09-06T00:00:00.000"),
 //  moment("2010-10-11T00:00:00.000") ]
+
+moment().nextHoliday().isHoliday();
+//Labor Day
 ```
 
 ### holidaysBetween
@@ -233,28 +242,40 @@ moment('2017-01-01').holidaysBetween();
 * **adjust** - Set to `true` to make all holidays that land on a Saturday go to the prior Friday and all holidays that land on a Sunday go to the following Monday. Defaults to `false`.
 
 ## The Holidays
-The following holidays are built-in:
 
-* New Year's Day
-* Martin Luther King Jr. Day
-* Valentine's Day
-* Washington's Birthday
-* Saint Patrick's Day
-* Memorial Day
-* Mother's Day
-* Father's Day
-* Independence Day
-* Labor Day
-* Columbus Day
-* Halloween
-* Veteran's Day
-* Thanksgiving Day
-* Day after Thanksgiving
-* Christmas Eve
-* Christmas Day
-* New Year's Eve
+### Available Locales/Regions
+* [US](moment-holiday.js) (Default/Built-in)
+* [Easter](locale/easter.js) (Easter Related Holidays)
+* [Canada](locale/canada.js)
+  * `Canada/AB` - Alberta
+  * `Canada/BC` - British Columbia
+  * `Canada/MB` - Manitoba
+  * `Canada/NB` - New Brunswick
+  * `Canada/NL` - Newfoundland and Labrador
+  * `Canada/NS` - Nova Scotia
+  * `Canada/NT` - Northwest Territories
+  * `Canada/NU` - Nunavut
+  * `Canada/ON` - Ontario
+  * `Canada/PE` - Prince Edward Island
+  * `Canada/QC` - Quebec
+  * `Canada/SK` - Saskatchewan
+* [Finland](locale/finland.js)
+* [Germany](locale/germany.js)
+  * `Germany/BB` - Brandenburg
+  * `Germany/BW` - Baden-Württemberg
+  * `Germany/BY` - Bayern
+  * `Germany/HE` - Hessen
+  * `Germany/MV` - Mecklenburg-Vorpommern
+  * `Germany/NW` - Nordrhein-Westfalen
+  * `Germany/RP` - Rheinland-Pfalz
+  * `Germany/SN` - Sachsen
+  * `Germany/SL` - Saarland
+  * `Germany/ST` - Sachsen-Anhalt
+  * `Germany/TH` - Thüringen
 
-Easter Sunday and Good Friday are also automatically included if you are using Node. (You can still easily add them in even when not using Node. See: [Modifying Holidays](#modifying-holidays))
+Rather than listing all of the holidays here, to see available holidays, view the source of the locale file.
+
+Easter related holidays for any locale will only be available if the Easter locale has been added. It's automatically added if you are using Node. (You can still easily add them in even when not using Node. See: [Modifying Holidays](#modifying-holidays))
 
 ### Modifying Holidays
 You can add and remove holidays by using the following helper functions:
@@ -262,6 +283,8 @@ You can add and remove holidays by using the following helper functions:
 *Note: Helper functions can be chained.*
 
 #### modifyHolidays.set
+Sets the holidays to be used.
+
 ```javascript
 moment.modifyHolidays.set(['New Years Day', 'Memorial Day', 'Thanksgiving']);
 
@@ -287,6 +310,8 @@ moment().holidays(); // Returns all holidays
 ```
 
 #### modifyHolidays.add
+Adds holiday(s) to the holidays being used.
+
 ```javascript
 moment.modifyHolidays.add({
   "Inauguration Day": {
@@ -300,13 +325,39 @@ moment().holiday('Inauguration');
 ```
 
 #### modifyHolidays.remove
+Removes holiday(s) from the holidays being used.
+
 ```javascript
 moment.modifyHolidays.remove('Christmas');
 
 moment.modifyHolidays.remove(['Dad Day', 'Mom Day', 'Saint Paddys Day']);
 ```
 
-#### Adding/Setting Locales
+#### modifyHolidays.undo
+Sets the holidays being used back to the way they were before they were last changed.
+
+```javascript
+moment.modifyHolidays.set(['Christmas', 'Thanksgiving', 'Mothers Day', 'Fathers Day']);
+moment().holidays();
+//{ 'Mother\'s Day': moment("2017-05-14T00:00:00.000"),
+//  'Father\'s Day': moment("2017-06-18T00:00:00.000"),
+//  'Thanksgiving Day': moment("2017-11-23T00:00:00.000"),
+//  'Christmas Day': moment("2017-12-25T00:00:00.000") }
+
+moment.modifyHolidays.remove(['Thanksgiving', 'Christmas']);
+moment().holidays();
+//{ 'Mother\'s Day': moment("2017-05-14T00:00:00.000"),
+//  'Father\'s Day': moment("2017-06-18T00:00:00.000") }
+
+moment.modifyHolidays.undo();
+moment().holidays();
+//{ 'Mother\'s Day': moment("2017-05-14T00:00:00.000"),
+//  'Father\'s Day': moment("2017-06-18T00:00:00.000"),
+//  'Thanksgiving Day': moment("2017-11-23T00:00:00.000"),
+//  'Christmas Day': moment("2017-12-25T00:00:00.000") }
+```
+
+#### Adding/Setting Locales/Regions
 You can also use these functions to set or add holidays from an available locale file:
 
 ```javascript
@@ -317,6 +368,32 @@ moment('2001-12-26').isHoliday('Boxing Day');
 moment.modifyHolidays.add('Easter').remove('Good Friday');
 moment().holiday(['Easter Sunday', 'Good Friday']);
 //{ 'Easter Sunday': moment("2017-04-16T00:00:00.000") }
+```
+
+You use these same functions to specify regions to add:
+
+```javascript
+moment.modifyHolidays.set('Germany/SN');
+moment('2017-11-22').isHoliday();
+//Buß- und Bettag
+
+moment.modifyHolidays.set('Canada/QC/ON');
+moment().holidays(['boxing', 'baptiste']);
+//{ 'Boxing Day': moment("2017-12-26T00:00:00.000"),
+//  'St. Jean Baptiste Day': moment("2017-06-24T00:00:00.000") }
+```
+
+You can also cherry-pick the holidays you want from a locale by passing a string or an array of strings as the second parameter:
+
+```javascript
+moment.modifyHolidays.add('Easter', ['ascension', 'pentecost']);
+moment().holiday(['ascension', 'pentecost']);
+//{ 'Ascension Day': moment("2017-05-25T00:00:00.000"),
+//  'Pentecost Sunday': moment("2017-06-04T00:00:00.000") }
+
+moment.modifyHolidays.add('Germany/BB', 'Ostersonntag');
+moment('2001-09-14').isHoliday();
+//[ 'Easter Sunday', 'Ostersonntag' ]
 ```
 
 *Note: If you're not using Node (or anything that doesn't support the `require` function), you'll need to make sure that you include the locale file(s) that you're trying to use. For example:*
@@ -345,6 +422,7 @@ Holiday objects accept the following options:
   * `8/21|9/4` - The 21st of August through the 4th of September.
   * `11` - The 11th of every month of the year.
   * `(0)` - Every Sunday of the year.
+  * `(6,-2)` - The second to last Friday of every month of the year.
   * `10/(3)` - Every Wednesday in October.
   * `12/7/2014` - December 7th, 2014.
   * `(6)/2014` - Every Saturday of the year 2014.
@@ -354,6 +432,10 @@ Holiday objects accept the following options:
 * **keywords** - An array of optional keywords.
 * **keywords_y** - An array of required keywords.
 * **keywords_n** - An array of banned keywords.
+* **regions** - An array of region abbreviations that the holiday is celebrated in. Basically a white-list.
+* **regions_n** - An array of region abbreviations that the holiday is NOT celebrated in. Basically a black-list.
+
+RegEx can be used in keywords. For example, `st[\\s\\.]` will match `St Jean` and `St. Patrick`, but not `Christmas` and `x-?mas` will match `xmas` and `x-mas`.
 
 View the source of [moment-holiday.js](moment-holiday.js) for a better look at how the keywords work.
 
