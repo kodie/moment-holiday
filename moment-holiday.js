@@ -1,5 +1,5 @@
 //! moment-holiday.js
-//! version : 1.4.1
+//! version : 1.4.2
 //! author : Kodie Grantham
 //! license : MIT
 //! https://github.com/kodie/moment-holiday
@@ -244,6 +244,8 @@
 
     if (h.hasOwnProperty(holiday)) {
       wn.push(holiday);
+    } else if (fk = findKey(holiday, h)) {
+      wn.push(fk);
     } else {
       for (var hd in h) {
         if (!h.hasOwnProperty(hd)) { continue; }
@@ -439,6 +441,14 @@
   var arrayify = function(arr) {
     if (arr && arr.constructor !== Array) { return [arr]; }
     return arr;
+  };
+
+  var findKey = function(find, obj) {
+    if (obj.constructor === Object) { obj = Object.keys(obj); }
+    for (var i = 0; i < obj.length; i++) {
+      if (find.toLowerCase() === obj[i].toLowerCase()) { return obj[i]; }
+    }
+    return false;
   };
 
   var merge = function(o1, o2) {

@@ -21,20 +21,21 @@
   moment.holidays.germany = {
     "Neujahrstag": {
       date: '1/1',
-      keywords: ['neujahrstag']
+      keywords: ['neujahrstag', 'new', 'year']
     },
     "Karfreitag": {
       date: 'goodfriday',
-      keywords: ['karfreitag']
+      keywords: ['karfreitag', 'good', 'friday']
     },
     "Ostersonntag": {
       date: 'easter',
-      keywords: ['ostersonntag'],
+      keywords: ['ostersonntag', 'easter'],
+      keywords_n: ['monday'],
       regions: ['bb']
     },
     "Ostermontag": {
       date: 'eastermonday',
-      keywords: ['ostermontag']
+      keywords: ['ostermontag', 'easter', 'monday']
     },
     "Heilige Drei Könige": {
       date: '1/6',
@@ -47,20 +48,20 @@
     },
     "Christi Himmelfahrt": {
       date: 'ascensionday',
-      kaywords: ['christi', 'himmelfahrt']
+      kaywords: ['christi', 'himmelfahrt', 'ascension']
     },
     "Pfingstsonntag": {
       date: 'pentecost',
-      keywords: ['pfingstsonntag'],
+      keywords: ['pfingstsonntag', 'pentecost'],
       regions: ['bb']
     },
     "Pfingstmontag": {
       date: 'whitmonday',
-      keywords: ['pfingstmontag']
+      keywords: ['pfingstmontag', 'whit', 'monday']
     },
     "Fronleichnam": {
       date: 'corpuschristi',
-      keywords: ['fronleichnam'],
+      keywords: ['fronleichnam', 'corpus', 'christi'],
       regions: ['bw', 'by', 'he', 'nw', 'rp', 'sl']
     },
     "Mariä Himmelfahrt": {
@@ -89,12 +90,7 @@
     },
     "Weihnachten": {
       date: '12/24',
-      keywords: ['weihnachten']
-    },
-    "Weihnachtsfeiertag": {
-      date: '12/15',
-      keywords: ['weihnachtsfeiertag'],
-      keywords_n: ['zweiter']
+      keywords: ['weihnachten', 'christmas']
     },
     "Zweiter Weihnachtsfeiertag": {
       date: '12/26',

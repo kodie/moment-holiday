@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [Unreleased]
 
 
+## [1.4.2] - 2017-07-26
+### Added
+- [Added Croatia locale](https://github.com/kodie/moment-holiday/pull/1) (Thanks [@diomed](https://github.com/diomed)!).
+- Some more keywords to bower and NPM.
+
+### Changed
+- Updated some keywords for locales to make them easier to find.
+- Internal function `findHoliday` will now skip keyword search if the string matches the holiday name exactly (case-insensitive).
+- Fixed a bug where `npm test` would fail on holidays with matching keywords.
+
+
 ## [1.4.1] - 2017-07-24
 ### Changed
 - Changed internal function `merge` dynamic parameters to static ones for older node version support.
@@ -79,6 +90,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Initial release.
 
 [Unreleased]: https://github.com/kodie/moment-holiday/compare/v1.0.0...HEAD
+[1.4.2]: https://github.com/kodie/moment-holiday/compare/v1.4.1...v1.4.2
 [1.4.1]: https://github.com/kodie/moment-holiday/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/kodie/moment-holiday/compare/v1.3.1...v1.4.0
 [1.3.1]: https://github.com/kodie/moment-holiday/compare/v1.3.0...v1.3.1

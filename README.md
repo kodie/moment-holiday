@@ -259,6 +259,7 @@ moment('2017-01-01').holidaysBetween();
   * `Canada/PE` - Prince Edward Island
   * `Canada/QC` - Quebec
   * `Canada/SK` - Saskatchewan
+* [Croatia](locale/croatia.js)
 * [Finland](locale/finland.js)
 * [Germany](locale/germany.js)
   * `Germany/BB` - Brandenburg

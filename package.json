@@ -1,13 +1,21 @@
 {
   "name": "moment-holiday",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "A Moment.js plugin for handling holidays.",
   "keywords": [
     "moment",
     "momentjs",
     "holiday",
     "holidays",
-    "calculation"
+    "calculation",
+    "united states",
+    "us",
+    "canada",
+    "croatia",
+    "hrvatska",
+    "easter",
+    "finland",
+    "germany"
   ],
   "author": {
     "name": "Kodie Grantham",

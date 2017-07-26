@@ -12,9 +12,13 @@ require('fs').readdirSync(localePath).forEach(function(file){
 
 
 test('holiday_1', function(t){
+  moment.modifyHolidays.set('US');
+
   var w = moment().holiday('New Years');
   t.true(moment.isMoment(w));
   t.true(w.isSame(w.startOf('year'), 'day'));
+
+  moment.modifyHolidays.undo();
 });
 
 test('holiday_2', function(t){
@@ -88,7 +92,7 @@ test('holidaysBetween_1', function(t){
 
 test('holidaysBetween_2', function(t){
   var w = moment('2010-10-03').holidaysBetween('2010-10-10');
-  t.false(w);
+  t.is(w.constructor, Array);
 });
 
 test('holidaysBetween_3', function(t){
