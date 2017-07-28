@@ -4,7 +4,7 @@
 (function() {
   var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? require('moment') : this.moment;
 
-  moment.holidays.croatia = {
+  moment.holidays.india = {
     "New Year's Day": {
       date: '1/1',
       keywords: ['naya', 'saal', 'new', 'year']
@@ -16,10 +16,6 @@
     "Mahavir Jayanti": {
       date: '4/9',
       keywords: ['mahavir', 'birthday']
-    },
-    "Good Friday": {
-      date: 'goodfriday',
-      keywords: ['good', 'friday']
     },
     "May Day": {
       date: '5/1',
