@@ -52,7 +52,7 @@
     },
     "Día de la Independencia": {
       date: '9/7',
-      keywords: ['božić', 'christmas']
+      keywords: ['independencia']
     },
     "Paso a la Inmortalidad del Gral. José de San Martín": {
       date: '21/8',
