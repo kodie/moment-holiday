@@ -7,20 +7,21 @@
 
   moment.holidays.easter = {
     "Ash Wednesday": {
-      date: 'ashwednesday',
-      keywords_y: ['ash'],
-      keywords: ['wednesday']
+      date: 'easter-46'
     },
     "Lent": {
-      date: 'lent',
-      keywords_y: ['lent']
+      date: 'easter-46|easter-3'
+    },
+    "Maundy Thursday": {
+      date: 'easter-3',
+      keywords_y: ['maundy', 'thursday']
     },
     "Good Friday": {
-      date: 'goodfriday',
+      date: 'easter-2',
       keywords_y: ['good', 'friday']
     },
     "Holy Saturday": {
-      date: 'holysaturday',
+      date: 'easter-1',
       keywords_y: ['holy', 'saturday']
     },
     "Easter Sunday": {
@@ -29,80 +30,63 @@
       keywords: ['sunday']
     },
     "Easter Monday": {
-      date: 'eastermonday',
+      date: 'easter+1',
       keywords_y: ['easter', 'monday']
     },
     "Ascension Day": {
-      date: 'ascension',
-      keywords_y: ['ascension']
+      date: 'easter+39'
     },
     "Pentecost Sunday": {
-      date: 'pentecost',
+      date: 'easter+49',
       keywords_y: ['pentecost'],
       keywords: ['sunday']
     },
     "Whit Monday": {
-      date: 'whitmonday',
+      date: 'easter+50',
       keywords_y: ['whit'],
       keywords: ['monday']
     },
     "Corpus Christi": {
-      date: 'corpuschristi',
-      keywords: ['corpus', 'christi', 'feast']
+      date: 'easter+60',
+      keywords: ['feast']
     }
   };
 
-  var easter = function(Y) {
-    var C = Math.floor(Y/100);
-    var N = Y - 19*Math.floor(Y/19);
-    var K = Math.floor((C - 17)/25);
-    var I = C - Math.floor(C/4) - Math.floor((C - K)/3) + 19*N + 15;
-    I = I - 30*Math.floor((I/30));
-    I = I - Math.floor(I/28)*(1 - Math.floor(I/28)*Math.floor(29/(I + 1))*Math.floor((21 - N)/11));
-    var J = Y + Math.floor(Y/4) + I + 2 - C + Math.floor(C/4);
-    J = J - 7*Math.floor(J/7);
-    var L = I - J;
-    var M = 3 + Math.floor((L + 40)/44);
-    var D = L + 28 - 31*Math.floor(M/4);
-    return moment([Y, (M-1), D]);
+  var easter = function(y) {
+    var c = Math.floor(y / 100);
+    var n = y - 19 * Math.floor(y / 19);
+    var k = Math.floor((c - 17) / 25);
+    var i = c - Math.floor(c / 4) - Math.floor((c - k) / 3) + 19 * n + 15;
+    i = i - 30 * Math.floor((i / 30));
+    i = i - Math.floor(i / 28) * (1 - Math.floor(i / 28) * Math.floor(29 / (i + 1)) * Math.floor((21 - n) / 11));
+    var j = y + Math.floor(y / 4) + i + 2 - c + Math.floor(c / 4);
+    j = j - 7 * Math.floor(j / 7);
+    var l = i - j;
+    var m = 3 + Math.floor((l + 40) / 44);
+    var d = l + 28 - 31 * Math.floor(m / 4);
+    return moment([y, (m - 1), d]);
   };
 
   moment.modifyHolidays.extendParser(function(m, date){
-    if (date === 'ashwednesday' ||
-        date === 'lent' ||
-        date === 'goodfriday' ||
-        date === 'holysaturday' ||
-        date === 'easter' ||
-        date === 'eastermonday' ||
-        date === 'ascension' ||
-        date === 'pentecost' ||
-        date === 'whitmonday' ||
-        date === 'corpuschristi') {
+    if (~date.indexOf('easter')) {
+      var dates = date.split('|');
+      var ds = [];
 
-      var e = easter(m.year());
+      for (i = 0; i < dates.length; i++) {
+        if (dates[i].substring(0, 6) === 'easter') {
+          var e = easter(m.year());
 
-      if (date === 'ashwednesday') { return e.subtract(46, 'days'); }
-      if (date === 'goodfriday') { return e.subtract(2, 'days'); }
-      if (date === 'holysaturday') { return e.subtract(1, 'day'); }
-      if (date === 'easter') { return e; }
-      if (date === 'eastermonday') { return e.add(1, 'day'); }
-      if (date === 'ascension') { return e.add(39, 'days'); }
-      if (date === 'pentecost') { return e.add(49, 'days'); }
-      if (date === 'whitmonday') { return e.add(50, 'days'); }
-      if (date === 'corpuschristi') { return e.add(60, 'days'); }
+          if (dates[i].charAt(6) === '-') { e.subtract(dates[i].substring(7), 'days'); }
+          if (dates[i].charAt(6) === '+') { e.add(dates[i].substring(7), 'days'); }
 
-      if (date === 'lent') {
-        var lent = [];
-        var d = moment(e).subtract(46, 'days');
-        var length = e.subtract(2, 'days').diff(d, 'days');
-
-        for (i = 0; i < length; i++) {
-          lent.push(moment(d));
-          d.add(1, 'day');
+          if (dates.length === 1) { return e; }
+          ds.push(e.format('M/D'));
+        } else {
+          ds.push(dates[i]);
         }
-
-        return lent;
       }
+
+      if (ds.length) { return ds.join('|'); }
     }
   });
 

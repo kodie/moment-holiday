@@ -6,6 +6,24 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [Unreleased]
 
 
+## [1.5.0] - TBD
+### Added
+- Argentina, Denmark, and India locales.
+- `modifyHolidays.load` function.
+- gulp build tasks.
+- Table of Contents to readme.
+
+### Changed
+- Fixed bug where getting the weekday on or before/after a certain date would fail if the next specific weekday is 6 days away.
+- Holiday names are now checked the same as keywords (using only words that are 3 characters or more).
+- A date string can now be passed back to the parser from a parser extension.
+- The holiday keyword finder will now return multiple holidays in the case of a keyword points tie rather than just false.
+- `holiday` function will now return false is the current holiday set is empty and the holiday parameter is set to null.
+- Made `test.js` more dynamic for all locales.
+- `us` locale is now `United States` and is no longer built-in to `moment-holiday.js` by default (You can still get the one with `United States` built-in by using `build/moment-holiday-us.js`).
+- When loading locale files, spaces are now converted to underscores.
+
+
 ## [1.4.2] - 2017-07-26
 ### Added
 - [Added Croatia locale](https://github.com/kodie/moment-holiday/pull/1) (Thanks [@diomed](https://github.com/diomed)!).
@@ -90,6 +108,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 - Initial release.
 
 [Unreleased]: https://github.com/kodie/moment-holiday/compare/v1.0.0...HEAD
+[1.5.0]: https://github.com/kodie/moment-holiday/compare/v1.4.2...v1.5.0
 [1.4.2]: https://github.com/kodie/moment-holiday/compare/v1.4.1...v1.4.2
 [1.4.1]: https://github.com/kodie/moment-holiday/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/kodie/moment-holiday/compare/v1.3.1...v1.4.0

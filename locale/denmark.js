@@ -1,7 +1,6 @@
 //! moment-holiday.js locale configuration
 //! locale : Denmark
-//! author : Kodie Grantham : https://github.com/kodie
-
+//! author : Alexander Køpke : https://github.com/alexanderkopke
 
 (function() {
   var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? require('moment') : this.moment;
@@ -9,41 +8,39 @@
   moment.holidays.denmark = {
     "Nytårsdag": {
       date: '1/1',
-      keywords: ['nytårsdag', 'dag', 'nytår']
+      keywords: ['nytarsdag', 'new', 'years']
     },
     "Skærfredag": {
-      date: 'goodfriday',
-      keywords: ['skærfredag', 'skær', 'fredag']
+      date: 'easter-2',
+      keywords: ['skaerfredag', 'good', 'friday']
     },
     "Påske": {
       date: 'easter',
-      keywords: ['påske', 'easter'],
+      keywords: ['paske', 'easter', 'sunday'],
     },
     "Anden påskedag": {
-      date: 'eastermonday',
-      keywords: ['andenpåskedag', 'anden', 'påskedag']
+      date: 'easter+1',
+      keywords: ['andenpåskedag', 'andenpaskedag', 'paskedag', 'easter', 'monday']
     },
-
     "Første maj": {
       date: '5/1',
-      keywords: ['førstemaj']
+      keywords: ['førstemaj', 'forstemaj', 'forste', 'maj']
     },
     "Kristi himmelfart": {
-      date: 'ascensionday',
-      kaywords: ['kristi', 'himmelfart', 'ascension']
+      date: 'easter+39',
+      kaywords: ['ascension']
     },
     "Pinse": {
-      date: 'pentecost',
-      keywords: ['pinse', 'pentecost']
-        },
-    "Anden pinse": {
-      date: 'whitmonday',
-      keywords: ['andenpinsedag', 'anden', 'pinsedag']
+      date: 'easter+49',
+      keywords: ['pentecost']
     },
-
+    "Anden pinse": {
+      date: 'easter+50',
+      keywords: ['andenpinsedag', 'pinsedag', 'whit', 'monday']
+    },
     "Juleaften": {
       date: '12/24',
-      keywords: ['juleaften', 'christmas']
+      keywords: ['christmas']
     },
     "Anden juledag": {
       date: '12/25',

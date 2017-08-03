@@ -1,3 +1,13 @@
 .DS_Store
+index.js
 npm-debug.log
 node_modules
+/build/*
+!/build/moment-holiday-pkg.js
+!/build/moment-holiday-pkg.min.js
+!/build/moment-holiday-pkg.min.js.map
+!/build/moment-holiday-us.js
+!/build/moment-holiday-us.min.js
+!/build/moment-holiday-us.min.js.map
+!/build/moment-holiday.min.js
+!/build/moment-holiday.min.js.map

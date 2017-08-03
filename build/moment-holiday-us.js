@@ -605,3 +605,199 @@
 
   if ((typeof module !== 'undefined' && module !== null ? module.exports : void 0) != null) { module.exports = moment; }
 }).call(this);
+
+//! moment-holiday.js locale configuration
+//! locale : United States
+//! author : Kodie Grantham : https://github.com/kodie
+
+(function() {
+  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? require('moment') : this.moment;
+
+  moment.holidays.united_states = {
+    "New Year's Day": {
+      date: '1/1',
+      keywords_n: ['eve']
+    },
+    "Martin Luther King Jr. Day": {
+      date: '1/(1,3)',
+      keywords: ['mlk']
+    },
+    "Valentine's Day": {
+      date: '2/14'
+    },
+    "Washington's Birthday": {
+      date: '2/(1,3)',
+      keywords: ['george', 'president', 'day']
+    },
+    "Saint Patrick's Day": {
+      date: '3/17',
+      keywords: ['st[\\s\\.]', 'paddy', 'patty']
+    },
+    "Good Friday": {
+      date: 'easter-2',
+      keywords_y: ['good', 'friday']
+    },
+    "Easter Sunday": {
+      date: 'easter',
+      keywords_y: ['easter'],
+      keywords: ['sunday']
+    },
+    "Memorial Day": {
+      date: '5/(1,-1)'
+    },
+    "Mother's Day": {
+      date: '5/(0,2)',
+      keywords: ['mom']
+    },
+    "Father's Day": {
+      date: '6/(0,3)',
+      keywords: ['dad']
+    },
+    "Independence Day": {
+      date: '7/4',
+      keywords: ['4th', 'fourth', 'july']
+    },
+    "Labor Day": {
+      date: '9/(1,1)',
+      keywords: ['labour']
+    },
+    "Columbus Day": {
+      date: '10/(1,2)',
+      keywords: ['christopher']
+    },
+    "Halloween": {
+      date: '10/31'
+    },
+    "Veteran's Day": {
+      date: '11/11',
+      keywords: ['vet']
+    },
+    "Thanksgiving Day": {
+      date: '11/(4,4)',
+      keywords: ['thanks', 'turkey'],
+      keywords_n: ['after']
+    },
+    "Day after Thanksgiving": {
+      date: '11/(5,4)',
+      keywords: ['thanks', 'turkey'],
+      keywords_y: ['after']
+    },
+    "Christmas Eve": {
+      date: '12/24',
+      keywords: ['christ', 'x-?mas'],
+      keywords_y: ['eve']
+    },
+    "Christmas Day": {
+      date: '12/25',
+      keywords: ['christ', 'x-?mas'],
+      keywords_n: ['eve']
+    },
+    "New Year's Eve": {
+      date: '12/31',
+      keywords_y: ['year', 'eve']
+    }
+  };
+
+  if ((typeof module !== 'undefined' && module !== null ? module.exports : void 0) != null) { module.exports = moment; }
+}).call(this);
+
+//! moment-holiday.js locale configuration
+//! locale : Easter Related Holidays
+//! author : Kodie Grantham : https://github.com/kodie
+
+(function() {
+  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? require('moment') : this.moment;
+
+  moment.holidays.easter = {
+    "Ash Wednesday": {
+      date: 'easter-46'
+    },
+    "Lent": {
+      date: 'easter-46|easter-3'
+    },
+    "Maundy Thursday": {
+      date: 'easter-3',
+      keywords_y: ['maundy', 'thursday']
+    },
+    "Good Friday": {
+      date: 'easter-2',
+      keywords_y: ['good', 'friday']
+    },
+    "Holy Saturday": {
+      date: 'easter-1',
+      keywords_y: ['holy', 'saturday']
+    },
+    "Easter Sunday": {
+      date: 'easter',
+      keywords_y: ['easter'],
+      keywords: ['sunday']
+    },
+    "Easter Monday": {
+      date: 'easter+1',
+      keywords_y: ['easter', 'monday']
+    },
+    "Ascension Day": {
+      date: 'easter+39'
+    },
+    "Pentecost Sunday": {
+      date: 'easter+49',
+      keywords_y: ['pentecost'],
+      keywords: ['sunday']
+    },
+    "Whit Monday": {
+      date: 'easter+50',
+      keywords_y: ['whit'],
+      keywords: ['monday']
+    },
+    "Corpus Christi": {
+      date: 'easter+60',
+      keywords: ['feast']
+    }
+  };
+
+  var easter = function(y) {
+    var c = Math.floor(y / 100);
+    var n = y - 19 * Math.floor(y / 19);
+    var k = Math.floor((c - 17) / 25);
+    var i = c - Math.floor(c / 4) - Math.floor((c - k) / 3) + 19 * n + 15;
+    i = i - 30 * Math.floor((i / 30));
+    i = i - Math.floor(i / 28) * (1 - Math.floor(i / 28) * Math.floor(29 / (i + 1)) * Math.floor((21 - n) / 11));
+    var j = y + Math.floor(y / 4) + i + 2 - c + Math.floor(c / 4);
+    j = j - 7 * Math.floor(j / 7);
+    var l = i - j;
+    var m = 3 + Math.floor((l + 40) / 44);
+    var d = l + 28 - 31 * Math.floor(m / 4);
+    return moment([y, (m - 1), d]);
+  };
+
+  moment.modifyHolidays.extendParser(function(m, date){
+    if (~date.indexOf('easter')) {
+      var dates = date.split('|');
+      var ds = [];
+
+      for (i = 0; i < dates.length; i++) {
+        if (dates[i].substring(0, 6) === 'easter') {
+          var e = easter(m.year());
+
+          if (dates[i].charAt(6) === '-') { e.subtract(dates[i].substring(7), 'days'); }
+          if (dates[i].charAt(6) === '+') { e.add(dates[i].substring(7), 'days'); }
+
+          if (dates.length === 1) { return e; }
+          ds.push(e.format('M/D'));
+        } else {
+          ds.push(dates[i]);
+        }
+      }
+
+      if (ds.length) { return ds.join('|'); }
+    }
+  });
+
+  if ((typeof module !== 'undefined' && module !== null ? module.exports : void 0) != null) { module.exports = moment; }
+}).call(this);
+
+//! Set default locales
+(function() {
+  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? require('moment') : this.moment;
+  moment.modifyHolidays.add("United States");
+}).call(this);

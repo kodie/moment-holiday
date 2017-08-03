@@ -8,48 +8,46 @@
   moment.holidays.croatia = {
     "Nova Godina": {
       date: '1/1',
-      keywords: ['nova', 'godina', 'new', 'year']
+      keywords: ['new', 'year']
     },
     "Bogojavljenje": {
       date: '1/6',
-      keywords: ['bogojavljenje', 'tri kralja']
+      keywords: ['tri kralja']
     },
     "Uskrs": {
       date: 'easter',
-      keywords: ['uskrs', 'easter'],
+      keywords: ['easter'],
       keywords_n: ['monday']
     },
     "Uskrsni ponedjeljak": {
-      date: 'eastermonday',
-      keywords: ['uskrsni', 'uskršnji', 'ponedjeljak', 'easter', 'monday']
+      date: 'easter+1',
+      keywords: ['uskršnji', 'easter', 'monday']
     },
     "Praznik rada": {
-      date: '5/1',
-      keywords: ['praznik', 'rada']
+      date: '5/1'
     },
     "Tijelovo": {
-      date: 'corpuschristi',
-      keywords: ['tijelovo', 'corpus', 'christi']
+      date: 'easter+60',
+      keywords: ['corpus', 'christi']
     },
     "Dan antifašističke borbe": {
       date: '6/22',
-      keywords: ['antifasisticke', 'antifašističke', 'borbe']
+      keywords: ['antifasisticke']
     },
     "Dan državnosti": {
       date: '6/25',
-      keywords: ['drzavnost', 'državnost', 'domovinske', 'domovinska']
+      keywords: ['drzavnost', 'domovinske', 'domovinska']
     },
     "Dan zahvalnosti": {
       date: '8/5',
-      keywords: ['domovinske', 'zahvalnosti', 'thanksgiving']
+      keywords: ['domovinske', 'thanksgiving']
     },
     "Velika Gospa": {
-      date: '8/15',
-      keywords: ['velika', 'gospa']
+      date: '8/15'
     },
     "Dan neovisnosti": {
       date: '10/8',
-      keywords: ['neovisnosti', 'nezavisnosti', 'independence']
+      keywords: ['nezavisnosti', 'independence']
     },
     "Dan svih svetih": {
       date: '11/1',
@@ -57,11 +55,11 @@
     },
     "Božić": {
       date: '12/25',
-      keywords: ['božić', 'christmas']
+      keywords: ['bozic', 'christmas']
     },
     "Sveti Stjepan": {
       date: '12/26',
-      keywords: ['sveti', 'stjepan', 'sv[\\s\\.]']
+      keywords: ['sv[\\s\\.]']
     }
   };
 

@@ -1,7 +1,7 @@
 //! moment-holiday.js locale configuration
 //! locale : Germany
 //! author : Kodie Grantham : https://github.com/kodie
-/*! regions :
+/* regions :
       BB : Brandenburg
       BW : Baden-Württemberg
       BY : Bayern
@@ -21,80 +21,75 @@
   moment.holidays.germany = {
     "Neujahrstag": {
       date: '1/1',
-      keywords: ['neujahrstag', 'new', 'year']
+      keywords: ['new', 'year']
     },
     "Karfreitag": {
-      date: 'goodfriday',
-      keywords: ['karfreitag', 'good', 'friday']
+      date: 'easter-2',
+      keywords: ['good', 'friday']
     },
     "Ostersonntag": {
       date: 'easter',
-      keywords: ['ostersonntag', 'easter'],
+      keywords: ['easter'],
       keywords_n: ['monday'],
       regions: ['bb']
     },
     "Ostermontag": {
-      date: 'eastermonday',
-      keywords: ['ostermontag', 'easter', 'monday']
+      date: 'easter+1',
+      keywords: ['easter', 'monday']
     },
     "Heilige Drei Könige": {
       date: '1/6',
-      keywords: ['heilige', 'drei', 'könige', 'konige'],
+      keywords: ['konige'],
       regions: ['bw', 'by', 'st']
     },
     "Maifeiertag": {
-      date: '5/1',
-      keywords: ['maifeiertag']
+      date: '5/1'
     },
     "Christi Himmelfahrt": {
-      date: 'ascensionday',
-      kaywords: ['christi', 'himmelfahrt', 'ascension']
+      date: 'easter+39',
+      kaywords: ['ascension']
     },
     "Pfingstsonntag": {
-      date: 'pentecost',
-      keywords: ['pfingstsonntag', 'pentecost'],
+      date: 'easter+49',
+      keywords: ['pentecost'],
       regions: ['bb']
     },
     "Pfingstmontag": {
-      date: 'whitmonday',
-      keywords: ['pfingstmontag', 'whit', 'monday']
+      date: 'easter+50',
+      keywords: ['whit', 'monday']
     },
     "Fronleichnam": {
-      date: 'corpuschristi',
-      keywords: ['fronleichnam', 'corpus', 'christi'],
+      date: 'easter+60',
+      keywords: ['corpus', 'christi'],
       regions: ['bw', 'by', 'he', 'nw', 'rp', 'sl']
     },
     "Mariä Himmelfahrt": {
       date: '8/15',
-      keywords: ['mariä', 'maria', 'himmelfahrt'],
+      keywords: ['maria'],
       regions: ['sl']
     },
     "Tag der deutschen Einheit": {
-      date: '10/3',
-      keywords: ['deutschen', 'einheit']
+      date: '10/3'
     },
     "Reformationstag": {
       date: '10/31',
-      keywords: ['reformationstag'],
       regions: ['bb', 'mv', 'sn', 'st', 'th']
     },
     "Allerheiligen": {
       date: '11/1',
-      keywords: ['allerheiligen'],
       regions: ['bw', 'by', 'nw', 'rp', 'sl']
     },
     "Buß- und Bettag": {
       date: '11/(3,[17])',
-      keywords: ['buß', 'bub', 'und', 'bettag'],
+      keywords: ['bub'],
       regions: ['sn']
     },
     "Weihnachten": {
       date: '12/24',
-      keywords: ['weihnachten', 'christmas']
+      keywords: ['christmas']
     },
     "Zweiter Weihnachtsfeiertag": {
       date: '12/26',
-      keywords: ['weihnachtsfeiertag'],
       keywords_y: ['zweiter']
     }
   };

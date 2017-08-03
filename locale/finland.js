@@ -8,49 +8,47 @@
   moment.holidays.finland = {
     "Uudenvuodenpäivä": {
       date: '1/1',
-      keywords: ['uudenvuodenpäivä', 'uudenvuodenpaiva', 'new', 'year']
+      keywords: ['uudenvuodenpaiva', 'new', 'year']
     },
     "Loppiainen": {
-      date: '1/6',
-      keywords: ['loppiainen']
+      date: '1/6'
     },
     "Vappu": {
-      date: '5/1',
-      keywords: ['vappu']
+      date: '5/1'
     },
     "Juhannuspäivä": {
       date: '6/(6,[21])',
-      keywords: ['juhannuspäivä', 'juhannuspaiva']
+      keywords: ['juhannuspaiva']
     },
     "Pyhäinpäivä": {
       date: '11/(6,[1])',
-      keywords: ['pyhäinpäivä', 'pyhainpaiva']
+      keywords: ['pyhainpaiva']
     },
     "Joulupäivä": {
       date: '12/25',
-      keywords: ['joulupäivä', 'joulupaiva', 'christmas']
+      keywords: ['joulupaiva', 'christmas']
     },
     "Tapaninpäivä": {
       date: '12/26',
-      keywords: ['tapaninpäivä', 'tapaninpaiva']
+      keywords: ['tapaninpaiva']
     },
     "Pitkäperjantai": {
-      date: 'goodfriday',
-      keywords: ['pitkäperjantai', 'pitkaperjantai', 'good', 'friday']
+      date: 'easter-2',
+      keywords: ['pitkaperjantai', 'good', 'friday']
     },
     "Pääsiäispäivä": {
       date: 'easter',
-      keywords: ['pääsiäispäivä', 'paasiaispaiva', 'easter'],
+      keywords: ['paasiaispaiva', 'easter'],
       keywords_n: ['toinen', 'monday']
     },
     "Toinen Pääsiäispäivä": {
-      date: 'eastermonday',
-      keywords: ['pääsiäispäivä', 'paasiaispaiva', 'easter', 'monday'],
+      date: 'easter+1',
+      keywords: ['paasiaispaiva', 'easter', 'monday'],
       keywords_y: ['toinen']
     },
     "Helatorstai": {
-      date: 'ascension',
-      keywords: ['helatorstai', 'ascension']
+      date: 'easter+39',
+      keywords: ['ascension']
     }
   };
 

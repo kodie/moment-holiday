@@ -1,6 +1,6 @@
 {
   "name": "moment-holiday",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "description": "A Moment.js plugin for handling holidays.",
   "keywords": [
     "moment",
@@ -12,7 +12,9 @@
     "us",
     "canada",
     "croatia",
+    "denmark",
     "hrvatska",
+    "india",
     "easter",
     "finland",
     "germany"
@@ -31,8 +33,9 @@
   },
   "homepage": "https://github.com/kodie/moment-holiday",
   "license": "MIT",
-  "main": "moment-holiday.js",
+  "main": "./build/moment-holiday-us.min.js",
   "files": [
+    "build/",
     "locale/"
   ],
   "dependencies": {

@@ -1,75 +1,74 @@
+//! moment-holiday.js locale configuration
+//! locale : Argentina
+//! author : NahuelOvejero : https://github.com/NahuelOvejero
+
 (function() {
   var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? require('moment') : this.moment;
 
   moment.holidays.argentina = {
     "Año Nuevo": {
       date: '1/1',
-      keywords: ['Año', 'Nuevo', 'new', 'year']
+      keywords: ['ano', 'new', 'year']
     },
-    "Carnaval": {
-      date: '27/2',
-      keywords: ['Carnaval', 'Festival']
+    "Lunes de Carnival": {
+      date: 'easter-48',
+      keywords: ['festival']
     },
-    "Carnaval": {
-      date: '28/2',
-      keywords: ['Carnaval', 'Festival'],
+    "Martes de Carnival": {
+      date: 'easter-47',
+      keywords: ['festival'],
     },
-    "Día Nacional de la Verdad y la Justicia": {
-      date: '24/3',
-      keywords: ['verdad', 'justicia', 'nacional', 'dia']
+    "Día de la Memoria por la Verdad y la Justicia": {
+      date: '3/24',
     },
-    "Día del Veterano y de los Caídos en la Guerra de Malvinas": {
-      date: '2/4',
-      keywords: ['malvinas', 'veterano','guerra','caidos']
+    "Día del Veterano de Guerra y los Caídos en las Islas Malvinas": {
+      date: '4/2',
+      keywords: ['caidos']
     },
-    "Pascuas Judias": {
-      date: '11/4',
-      keywords: ['pascuas', 'judias', '']
+    "Jueves Santo" : {
+      date: 'easter-3',
+      keywords: ['festividad', 'cristina']
     },
-    "Jueves Santo - Festividad cristiana" : {
-      date: '13/4',
-      keywords: ['jueves', 'santo', 'cristiana']
-    },
-    "Viernes Santo - Festividad cristiana": {
-      date: '14/4',
-     keywords: ['viernes', 'santo', 'cristiana']
+    "Viernes Santo": {
+      date: 'easter-2',
+      keywords: ['festividad', 'cristina']
     },
     "Día de Acción por la tolerancia y el respeto entre los pueblos": {
-      date: '24/4',
-      keywords: ['accion', 'tolerancia', 'respeto','pueblo']
+      date: '4/24',
+      keywords: ['accion', 'pueblo']
     },
     "Día del Trabajador": {
-      date: '1/5',
-      keywords: ['trabajador', 'dia']
+      date: '5/1',
+      keywords: ['labor', 'labour']
     },
     "Día de la Revolución de Mayo": {
-      date: '25/5',
-      keywords: ['revolucion', 'mayo', 'dia']
+      date: '5/25',
+      keywords: ['revolucion', 'revolution']
     },
-    "Día Paso a la Inmortalidad del Gral. Manual  Belgrano": {
-      date: '20/6',
-      keywords: ['manuel', 'belgrano', 'inmortalidad', 'bandera']
+    "Día Paso a la Inmortalidad del Gral. Manual Belgrano": {
+      date: '6/20',
+      keywords: ['bandera', 'flag']
     },
     "Día de la Independencia": {
-      date: '9/7',
-      keywords: ['božić', 'christmas']
+      date: '7/9',
+      keywords: ['independence']
     },
     "Paso a la Inmortalidad del Gral. José de San Martín": {
-      date: '21/8',
-      keywords: ['martin', 'san', 'jose','inmortalidad']
+      date: '8/(1,3)',
+      keywords: ['martin', 'jose', 'saint', 'st[\\s\\.]']
     },
     "Día del Respeto a la Diversidad Cultural": {
-      date: '16/10',
-      keywords: ['diversidad', 'cultural','respeto']
+      date: '10/(1,2)',
+      keywords: ['christopher', 'columbus', 'culture']
     },
     "Día de la Soberanía Nacional": {
-      date: '20/11',
-      keywords: ['soberania', 'nacional']
-    },    
+      date: '11/(1,4)',
+      keywords: ['soberania', 'sovereignty']
+    },
     "Navidad": {
-      date: '25/12',
-      keywords: ['navidad', 'christmas']
-    }    
+      date: '12/25',
+      keywords: ['christmas']
+    }
   };
 
   if ((typeof module !== 'undefined' && module !== null ? module.exports : void 0) != null) { module.exports = moment; }
