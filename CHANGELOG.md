@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [Unreleased]
 
 
-## [1.5.0] - TBD
+## [1.5.0] - 2017-08-03
 ### Added
 - Argentina, Denmark, and India locales.
 - `modifyHolidays.load` function.
