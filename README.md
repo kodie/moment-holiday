@@ -326,7 +326,7 @@ moment('2017-01-01').holidaysBetween();
   * `Germany/ST` - Sachsen-Anhalt
   * `Germany/TH` - Thüringen
 * [India](locale/india.js)
-* [United States](locale/united_states.js)
+* [United States](locale/united_states.js) (Default)
 
 Rather than listing all of the holidays here, to see available holidays, view the source of the locale file.
 
