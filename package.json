@@ -1,6 +1,6 @@
 {
   "name": "moment-holiday",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "A Moment.js plugin for handling holidays.",
   "keywords": [
     "moment",
@@ -39,8 +39,7 @@
     "locale/"
   ],
   "dependencies": {
-    "moment": ">=2.0.0",
-    "xo": "^0.18.2"
+    "moment": ">=2.0.0"
   },
   "devDependencies": {
     "ava": ">=0.10.0",
