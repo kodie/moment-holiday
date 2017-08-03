@@ -84,6 +84,8 @@ test('holiday_1', function(t){
     if (!w.length && !moment.isMoment(w)) { t.fail(e(em, l)); }
     if (w.length && !moment.isMoment(w[0])) { t.fail(e(em, l)); }
   });
+
+  t.pass();
 });
 
 test('holiday_2', function(t){
@@ -99,6 +101,8 @@ test('holiday_2', function(t){
       if (w[m].length && !moment.isMoment(w[m][0])) { t.fail(e(em, l)); }
     });
   });
+
+  t.pass();
 });
 
 test('holiday_3', function(t){
@@ -108,6 +112,8 @@ test('holiday_3', function(t){
     var w = moment('2009-05-10').holiday('__INVALID__');
     if (w) { t.fail(e(em, l)); }
   });
+
+  t.pass();
 });
 
 test('holiday_4', function(t){
@@ -118,6 +124,8 @@ test('holiday_4', function(t){
     t.is(typeof w, 'object', e(em, l));
     t.is(Object.keys(w).length, Object.keys(moment.holidays[l]).length, e(em, l));
   });
+
+  t.pass();
 });
 
 test('holiday_5', function(t){
@@ -133,6 +141,8 @@ test('holiday_5', function(t){
       if (w[m].length && !moment.isMoment(w[m][0]) && w[m][0].day() !== 0 && w[m][0].day() !== 6) { t.fail(e(em, l)); }
     });
   });
+
+  t.pass();
 });
 
 test('isHoliday_1', function(t){
@@ -145,6 +155,8 @@ test('isHoliday_1', function(t){
     var w = m.isHoliday();
     if (!~w.indexOf(h)) { t.fail(e(em, l)); }
   });
+
+  t.pass();
 });
 
 test('isHoliday_2', function(t){
@@ -157,6 +169,8 @@ test('isHoliday_2', function(t){
     var w = m.isHoliday(h);
     t.true(w, e(em, l));
   });
+
+  t.pass();
 });
 
 test('isHoliday_3', function(t){
@@ -166,6 +180,8 @@ test('isHoliday_3', function(t){
     var w = moment('2018-03-17').isHoliday('__INVALID__');
     t.false(w, e(em, l));
   });
+
+  t.pass();
 });
 
 test('isHoliday_4', function(t){
@@ -175,6 +191,8 @@ test('isHoliday_4', function(t){
     var w = moment('2011-01-01').isHoliday(null, true);
     t.false(w, e(em, l));
   });
+
+  t.pass();
 });
 
 test('previousHoliday_1', function(t){
@@ -184,6 +202,8 @@ test('previousHoliday_1', function(t){
     var w = moment('2002-06-15').previousHoliday();
     t.true(moment.isMoment(w), e(em, l));
   });
+
+  t.pass();
 });
 
 test('previousHoliday_2', function(t){
@@ -197,6 +217,8 @@ test('previousHoliday_2', function(t){
       if (m.day() === 0 || m.day() === 6) { t.fail(e(em2, l)); }
     });
   });
+
+  t.pass();
 });
 
 test('nextHoliday_1', function(t){
@@ -206,6 +228,8 @@ test('nextHoliday_1', function(t){
     var w = moment('2005-03-11').nextHoliday();
     t.true(moment.isMoment(w), e(em, l));
   });
+
+  t.pass();
 });
 
 test('nextHoliday_2', function(t){
@@ -219,6 +243,8 @@ test('nextHoliday_2', function(t){
       if (m.day() === 0 || m.day() === 6) { t.fail(e(em2, l)); }
     });
   });
+
+  t.pass();
 });
 
 test('holidaysBetween_1', function(t){
@@ -232,6 +258,8 @@ test('holidaysBetween_1', function(t){
       if (m.day() === 0 || m.day() === 6) { t.fail(e(em2, l)); }
     });
   });
+
+  t.pass();
 });
 
 test('holidaysBetween_2', function(t){
