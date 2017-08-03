@@ -32,7 +32,6 @@ function generate(locales, set, minify, filename) {
     .pipe(gulpif(minify, sourcemaps.init()))
     .pipe(concat(filename || 'moment-holiday-custom.js'))
     .pipe(gulpif(append !== '', inject.append(append)))
-    .pipe(gulp.dest('build/'))
     .pipe(gulpif(minify, uglify({output: {comments: '/^!/'}})))
     .pipe(gulpif(minify, rename({ extname: '.min.js' })))
     .pipe(gulpif(minify, sourcemaps.write('.')))

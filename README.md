@@ -60,13 +60,11 @@ bower install --save moment-holiday
 ## Building
 `moment-holiday.js` does not come with any locales built-in by default. However, the following files are included for your convenience:
 
-* `build/moment-holiday-pkg.js` - moment-holiday with all available locales built-in.
-* `build/moment-holiday-pkg.min.js` - The minfied version of the above file.
+* `build/moment-holiday-pkg.min.js` - moment-holiday with all available locales built-in.
 * `build/moment-holiday-pkg.min.js.map` - The sourcemap for the above file.
 
 
-* `build/moment-holiday-us.js` - moment-holiday with the `United States` locale built-in.
-* `build/moment-holiday-us.min.js` - The minified version of the above file.
+* `build/moment-holiday-us.min.js` - moment-holiday with the `United States` locale built-in.
 * `build/moment-holiday-us.min.js.map` - The sourcemap for the above file.
 
 
@@ -80,7 +78,7 @@ You can also generate your own custom builds of moment-holiday by using gulp wit
 * **name** - The name of the file to generate. (Defaults to `moment-holiday-custom.js`)
 * **locale** - The locale(s) you would like included in the build. Pass this option multiple times to include multiple locales.
 * **set** - The locale(s) to have set by default in the build. Pass this option multiple times to have multiple locales set by default.
-* **min** - Pass this option if you would also like a minified version of the file to be generated along with a sourcemap.
+* **min** - Pass this option if you would like the generated file to be minified.
 
 For example:
 
