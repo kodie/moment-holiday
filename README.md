@@ -326,6 +326,33 @@ moment('2017-01-01').holidaysBetween();
   * `Germany/ST` - Sachsen-Anhalt
   * `Germany/TH` - Thüringen
 * [India](locale/india.js)
+* [Switzerland](locale/switzerland.js)
+  * `Switzerland/AG` – Aargau
+  * `Switzerland/AI` – Appenzell Innerrhoden
+  * `Switzerland/AR` – Appenzell Ausserrhoden
+  * `Switzerland/BE` – Bern
+  * `Switzerland/BL` – Basel-Landschaft
+  * `Switzerland/BS` – Basel-Stadt
+  * `Switzerland/FR` – Freiburg
+  * `Switzerland/GE` – Genf
+  * `Switzerland/GL` – Glarus
+  * `Switzerland/GR` – Graubünden
+  * `Switzerland/JU` – Jura
+  * `Switzerland/LU` – Luzern
+  * `Switzerland/NE` – Neuenburg
+  * `Switzerland/NW` – Nidwalden
+  * `Switzerland/OW` – Obwalden
+  * `Switzerland/SG` – St. Gallen
+  * `Switzerland/SH` – Schaffhausen
+  * `Switzerland/SO` – Solothurn
+  * `Switzerland/SZ` – Schwyz
+  * `Switzerland/TG` – Thurgau
+  * `Switzerland/TI` – Tessin
+  * `Switzerland/UR` – Uri
+  * `Switzerland/VD` – Waadt
+  * `Switzerland/VS` – Wallis
+  * `Switzerland/ZG` – Zug
+  * `Switzerland/ZH` – Zürich
 * [United States](locale/united_states.js) (Default)
 
 Rather than listing all of the holidays here, to see available holidays, view the source of the locale file.
