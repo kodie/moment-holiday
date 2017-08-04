@@ -130,7 +130,7 @@
     "Eidg. Dank-, Buss- und Bettag": {
       date: '9/(0,3)',
       keywords: ['repentance'],
-      keywords_y: ['federal']
+      keywords_y: ['federal'],
       keywords_n: ['geneva', 'monday'],
       regions: ['vd']
     },
