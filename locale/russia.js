@@ -20,7 +20,7 @@
     },
     "May Day": {
       date: '5/1',
-      keywords: ['may day', 'labour', 'spring']
+      keywords: ['may day', ‘Labour', 'spring']
     },
     "Victory Day": {
       date: '5/9',
