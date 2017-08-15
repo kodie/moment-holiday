@@ -12,7 +12,7 @@
     },
     "Defender's Day": {
       date: '2/23',
-      keywords: ['defender\'s day', '23 of February"]
+      keywords: ['defender\'s day', '23 of February’]
     },
     "Women's Day": {
       date: '3/8',
