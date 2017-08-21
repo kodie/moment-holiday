@@ -55,14 +55,10 @@
       date: '12/8',
       keywords: ['festividad', 'cristiana']
     },
-		"Día de la Inmaculada Concepción ": {
-      date: '12/8',
-      keywords: ['festividad', 'cristiana']
-		    },
-		"Día de Navidad ": {
+    "Día de Navidad ": {
       date: '12/8',
       keywords: ['christmas', 'navidad', 'merryxmas']
-		    }    
+   }    
   };
   if ((typeof module !== 'undefined' && module !== null ? module.exports : void 0) != null) { module.exports = moment; }
 }).call(this);
