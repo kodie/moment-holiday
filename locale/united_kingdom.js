@@ -60,7 +60,7 @@
       date: '5/(1,1)',
       keywords_y: ['may'],
       keywords: ['spring', 'early', 'may']
-    }
+    },
     "Spring Bank Holiday": {
       date: '5/(1,-1)',
       keywords: ['bank', 'spring', 'late']
@@ -102,8 +102,8 @@
     },
     "Saint Andrews Day": {
       date: '10/30',
-      keywords: 'andrew', 'saint', 'st[\\s\\.]'],
-      regions: [SL]
+      keywords: ['andrew', 'saint', 'st[\\s\\.]'],
+      regions: ['SL']
     },
     "Christmas Day": {
       date: '12/25',
@@ -112,8 +112,7 @@
     },
     "Boxing Day": {
       date: '12/26',
-      keywords: ['box'],
-      regions: ['on']
+      keywords: ['box']
     }
   };
 
