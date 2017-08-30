@@ -58,7 +58,6 @@
     "yargs": ">=8.0.0"
   },
   "scripts": {
-    "test": "./node_modules/.bin/jshint *.js locale/*.js && ava",
-    "typescript-test": "tsc --project typing-tests"
+    "test": "./node_modules/.bin/jshint *.js locale/*.js && ava && tsc --project typing-tests"
   }
 }
