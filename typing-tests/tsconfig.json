@@ -1,0 +1,12 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "module": "commonjs",
+    "noEmit": true,
+    "noImplicitAny": true
+  },
+  "files": [
+    "../moment-holiday.d.ts",
+    "./moment-holiday-tests.ts"
+  ]
+}

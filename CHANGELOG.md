@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [Unreleased]
 
+### Added
+- `moment-holiday.d.ts` typescript typings.
 
 ## [1.5.1] - 2017-08-03
 ### Removed
