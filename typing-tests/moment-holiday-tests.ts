@@ -62,17 +62,66 @@ holidaysBetweenResult = moment().holidaysBetween(moment());
 holidaysBetweenResult = moment().holidaysBetween(moment(), false);
 holidaysBetweenResult = moment().holidaysBetween(moment(), true);
 
-let h: moment.IHolidays = moment.holidays;
-let a: any = moment.holidays.active;
-let al: any = moment.holidays.active_last;
+let holidayDefinition: moment.IHolidayDefinition = {
+    date: 'string'
+};
+holidayDefinition = {
+    date: 'string',
+    keywords: ['array'],
+};
+holidayDefinition = {
+    date: 'string',
+    keywords: ['array'],
+    keywords_n: ['array'],
+};
+holidayDefinition = {
+    date: 'string',
+    keywords: ['array'],
+    keywords_n: ['array'],
+    keywords_y: ['array'],
+};
+holidayDefinition = {
+    date: 'string',
+    keywords: ['array'],
+    keywords_n: ['array'],
+    keywords_y: ['array'],
+    regions: ['array'],
+};
+holidayDefinition = {
+    date: 'string',
+    keywords: ['array'],
+    keywords_n: ['array'],
+    keywords_y: ['array'],
+    regions: ['array'],
+    regions_n: ['array']
+};
 
-let mh: moment.IHolidayModifier = moment.modifyHolidays;
-mh = mh.set({});
-mh = mh.set({}, {});
-mh = mh.add({});
-mh = mh.add({}, {});
-mh = mh.remove({});
-mh = mh.undo();
-mh = mh.load({});
-mh = mh.extendParser((m: moment.Moment, d: string): any => {
+let holidays: moment.IHolidays = moment.holidays;
+let activeHolidays: moment.IHolidaysMapping = moment.holidays.active;
+activeHolidays = {
+    'Some holiday name': holidayDefinition
+};
+
+let lastActiveHolidays: moment.IHolidaysMapping = moment.holidays.active_last;
+lastActiveHolidays = {
+    'Some holiday name': holidayDefinition
+};
+
+let holidayModifier: moment.IHolidayModifier = moment.modifyHolidays;
+holidayModifier = holidayModifier.set('string');
+holidayModifier = holidayModifier.set(['array']);
+holidayModifier = holidayModifier.set(activeHolidays);
+holidayModifier = holidayModifier.set('string', {});
+holidayModifier = holidayModifier.set(['array'], {});
+holidayModifier = holidayModifier.set(activeHolidays, {});
+holidayModifier = holidayModifier.add(activeHolidays);
+holidayModifier = holidayModifier.add('string');
+holidayModifier = holidayModifier.add(activeHolidays, {});
+holidayModifier = holidayModifier.add('string', {});
+holidayModifier = holidayModifier.remove('string');
+holidayModifier = holidayModifier.remove(['array']);
+holidayModifier = holidayModifier.undo();
+holidayModifier = holidayModifier.load('string');
+holidayModifier = holidayModifier.load(['string']);
+holidayModifier = holidayModifier.extendParser((m: moment.Moment, d: string): moment.Moment | Array<moment.Moment> | false | void => {
 });
