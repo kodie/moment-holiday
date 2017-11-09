@@ -3,7 +3,7 @@
 //! author : Alexander Køpke : https://github.com/alexanderkopke
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? require('moment') : this.moment;
+  var moment = require('moment');
 
   moment.holidays.denmark = {
     "Nytårsdag": {

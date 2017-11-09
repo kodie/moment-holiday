@@ -11,7 +11,7 @@
 */
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? require('moment') : this.moment;
+  var moment = require('moment');
 
   moment.holidays.united_kingdom = {
     "New Year's Day": {
