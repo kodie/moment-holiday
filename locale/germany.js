@@ -93,7 +93,7 @@
       date: '12/24',
       keywords: ['christmas']
     },
-    "Erster Weihnachstfeiertag": {
+    "Erster Weihnachtsfeiertag": {
       date: '12/25',
       keywords: ['erster']
     },
