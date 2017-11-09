@@ -3,12 +3,17 @@
 //! author : Kodie Grantham : https://github.com/kodie
 /* regions :
       BB : Brandenburg
+      BE : Berlin
       BW : Baden-Württemberg
       BY : Bayern
+      HB : Bremen
       HE : Hessen
+      HH : Hamburg
       MV : Mecklenburg-Vorpommern
+      NI : Niedersachsen
       NW : Nordrhein-Westfalen
       RP : Rheinland-Pfalz
+      SH : Schleswig-Holstein
       SN : Sachsen
       SL : Saarland
       ST : Sachsen-Anhalt
@@ -87,6 +92,10 @@
     "Weihnachten": {
       date: '12/24',
       keywords: ['christmas']
+    },
+    "Erster Weihnachstfeiertag": {
+      date: '12/25',
+      keywords: ['erster']
     },
     "Zweiter Weihnachtsfeiertag": {
       date: '12/26',
