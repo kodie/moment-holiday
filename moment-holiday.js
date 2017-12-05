@@ -146,29 +146,29 @@
     var wn = [];
     var obj = {};
 
-    h = holidayObj || moment.holidays.active;
+    this.h = holidayObj || moment.holidays.active;
 
-    if (h.hasOwnProperty(holiday)) {
+    if (this.h.hasOwnProperty(holiday)) {
       wn.push(holiday);
-    } else if (fk = findKey(holiday, h)) {
+    } else if (fk = findKey(holiday, this.h)) {
       wn.push(fk);
     } else {
-      for (var hd in h) {
-        if (!h.hasOwnProperty(hd)) { continue; }
+      for (var hd in this.h) {
+        if (!this.h.hasOwnProperty(hd)) { continue; }
 
         pt[hd] = keywordMatches(holiday, hd.split(/[\s,.-]+/).filter(function(w){ return w.length > 2; })).length;
 
-        if (h[hd].keywords_n) {
-          var matchesN = keywordMatches(holiday, h[hd].keywords_n);
+        if (this.h[hd].keywords_n) {
+          var matchesN = keywordMatches(holiday, this.h[hd].keywords_n);
           if (matchesN.length) {
             pt[hd] = 0;
             continue;
           }
         }
 
-        if (h[hd].keywords_y) {
-          var matchesY = keywordMatches(holiday, h[hd].keywords_y);
-          if (matchesY && matchesY.length === h[hd].keywords_y.length) {
+        if (this.h[hd].keywords_y) {
+          var matchesY = keywordMatches(holiday, this.h[hd].keywords_y);
+          if (matchesY && matchesY.length === this.h[hd].keywords_y.length) {
             pt[hd] += matchesY.length;
           } else {
             pt[hd] = 0;
@@ -176,8 +176,8 @@
           }
         }
 
-        if (h[hd].keywords) {
-          var matches = keywordMatches(holiday, h[hd].keywords);
+        if (this.h[hd].keywords) {
+          var matches = keywordMatches(holiday, this.h[hd].keywords);
           if (matches) {
             pt[hd] += matches.length;
           } else {
@@ -199,7 +199,7 @@
 
     if (parse !== false) {
       for (var i = 0; i < wn.length; i++) {
-        var d = parseHoliday(self, h[wn[i]].date, adjust);
+        var d = parseHoliday(self, this.h[wn[i]].date, adjust);
         if (d) { obj[wn[i]] = d; }
       }
 
@@ -279,9 +279,9 @@
   };
 
   var getLocale = function(locale) {
-    regions = locale.split('/');
-    locale = regions[0].toLowerCase().replace(' ', '_');
-    regions.shift();
+    this.regions = locale.split('/');
+    locale = this.regions[0].toLowerCase().replace(' ', '_');
+    this.regions.shift();
 
     if (!moment.holidays[locale]) {
       try {
@@ -292,7 +292,7 @@
     }
 
     if (moment.holidays[locale]) {
-      if (regions.length) { return compileRegions(locale, regions); }
+      if (this.regions.length) { return compileRegions(locale, this.regions); }
       return moment.holidays[locale];
     }
 
