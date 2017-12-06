@@ -240,7 +240,7 @@
 
     for (var hd in h) {
       if (!h.hasOwnProperty(hd)) { continue; }
-      if (td = parseHoliday(self, h[hd].date, adjust)) { d[hd] = td; }
+      if (that.td = parseHoliday(self, h[hd].date, adjust)) { d[hd] = that.td; }
     }
 
     return d;
