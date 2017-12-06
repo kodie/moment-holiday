@@ -72,7 +72,7 @@
       var dates = date.split('|');
       var ds = [];
 
-      for (i = 0; i < dates.length; i++) {
+      for (var i = 0; i < dates.length; i++) {
         if (dates[i].substring(0, 6) === 'easter') {
           var e = easter(m.year());
 

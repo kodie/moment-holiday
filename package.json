@@ -1,6 +1,6 @@
 {
   "name": "nesto-moment-holiday",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "description": "A Moment.js plugin for handling holidays.",
   "keywords": [
     "moment",
