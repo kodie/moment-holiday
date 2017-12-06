@@ -399,7 +399,7 @@
   };
 
   moment.fn.holidays = function(holidays, adjust) {
-    return that.holiday(holidays, adjust);
+    return this.holiday(holidays, adjust);
   };
 
   moment.fn.isHoliday = function(holidays, adjust) {
@@ -407,7 +407,7 @@
 
     if (holidays) {
       holidays = arrayify(holidays);
-      h = that.holiday(holidays, adjust);
+      h = this.holiday(holidays, adjust);
       returnTitle = false;
     } else {
       h = getAllHolidays(this, adjust);
