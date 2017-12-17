@@ -385,6 +385,7 @@
         holidays = [holidays];
       }
 
+	  var td;
       for (var i = 0; i < holidays.length; i++) {
         if (td = findHoliday(this, holidays[i], adjust)) { d = Object.assign({}, d, td); }
       }
