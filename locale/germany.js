@@ -71,7 +71,7 @@
     "Mariä Himmelfahrt": {
       date: '8/15',
       keywords: ['maria'],
-      regions: ['sl']
+      regions: ['sl', 'by']
     },
     "Tag der deutschen Einheit": {
       date: '10/3'
