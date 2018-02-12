@@ -1,6 +1,6 @@
 {
-  "name": "nesto-moment-holiday",
-  "version": "1.5.7",
+  "name": "moment-holiday",
+  "version": "1.5.1",
   "description": "A Moment.js plugin for handling holidays.",
   "keywords": [
     "moment",
@@ -35,6 +35,10 @@
   "homepage": "https://github.com/kodie/moment-holiday",
   "license": "MIT",
   "main": "./build/moment-holiday-us.min.js",
+  "files": [
+    "build/",
+    "locale/"
+  ],
   "dependencies": {
     "moment": ">=2.0.0"
   },
