@@ -1,4 +1,4 @@
-//! moment-holiday.js locale configuration
+//! moment-holiday locale configuration
 //! locale : Portugal
 //! author : Pedro Martins : https://github.com/xmaarf
 //! national holidays only
