@@ -17,14 +17,16 @@
   var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? require('moment') : this.moment;
 
   // Holiday data taken from https://www.feiertage-oesterreich.at, including non-public holidays
+  // Public holidays can be "filtered" by passing `public` as a value for `.holidays()` and `.isHoliday()` calls
   moment.holidays.austria = {
     "Neujahrstag": {
       date: '1/1',
-      keywords: ['new', 'year']
+      keywords: ['new', 'year', 'public'],
+      keywords_n: ['eve']
     },
     "Heilige Drei Könige": {
       date: '1/6',
-      keywords: ['konige']
+      keywords: ['konige', 'public']
     },
     "St. Josef": {
       date: '3/19',
@@ -39,16 +41,16 @@
     },
     "Ostersonntag": {
       date: 'easter',
-      keywords: ['easter'],
+      keywords: ['easter', 'public'],
       keywords_n: ['monday']
     },
     "Ostermontag": {
       date: 'easter+1',
-      keywords: ['easter', 'monday']
+      keywords: ['easter', 'monday', 'public']
     },
     "Staatsfeiertag": {
       date: '5/1',
-      keywords: ['national']
+      keywords: ['national', 'public']
     },
     "St. Florian": {
       date: '4/5',
@@ -58,23 +60,23 @@
     },
     "Christi Himmelfahrt": {
       date: 'easter+39',
-      kaywords: ['ascension']
+      keywords: ['ascension', 'public']
     },
     "Pfingstsonntag": {
       date: 'easter+49',
-      keywords: ['pentecost']
+      keywords: ['pentecost', 'public']
     },
     "Pfingstmontag": {
       date: 'easter+50',
-      keywords: ['whit', 'monday']
+      keywords: ['whit', 'monday', 'public']
     },
     "Fronleichnam": {
       date: 'easter+60',
-      keywords: ['corpus', 'christi']
+      keywords: ['corpus', 'christi', 'public']
     },
     "Mariä Himmelfahrt": {
       date: '8/15',
-      keywords: ['assumption', 'mary']
+      keywords: ['assumption', 'mary', 'public']
     },
     "St. Rupert": {
       date: '9/24',
@@ -90,11 +92,11 @@
     },
     "Nationalfeiertag": {
       date: '10/26',
-      keywords: ['national']
+      keywords: ['national', 'public']
     },
     "Allerheiligen": {
       date: '11/1',
-      keywords: ['all', 'saints']
+      keywords: ['all', 'saints', 'public']
     },
     "St. Martin": {
       date: '11/11',
@@ -110,7 +112,7 @@
     },
     "Mariä Empfängnis": {
       date: '8/15',
-      keywords: ['immaculate', 'conception']
+      keywords: ['immaculate', 'conception', 'public']
     },
     "Heiliger Abend": {
       date: '12/24',
@@ -120,16 +122,18 @@
     },
     "Christtag": {
       date: '12/25',
-      keywords: ['christmas'],
+      keywords: ['christmas', 'public'],
       keywords_n: ['eve']
     },
     "Stefanitag": {
-      date: '12/25',
-      keywords: ['stephen']
+      date: '12/26',
+      keywords: ['stephen', 'public']
     },
     "Silvester": {
       date: '12/31',
-      keywords: ['new', 'year', 'eve']
+      keywords: ['new', 'year'],
+      keywords_n: ['public'],
+      keywords_y: ['eve']
     }
   };
 
