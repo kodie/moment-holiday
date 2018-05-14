@@ -31,8 +31,12 @@
     "Noël": {
       date: '12/25',
     },
+    "Vendredi Saint": {
+      date: 'easter-2',
+      keywords_y: ['good', 'friday'],
+    },
     "Jeudi de l'Ascension": {
-      date: 'easter-3',
+      date: 'easter+39',
       keywords_y: ['good', 'thursday'],
     },
     "Dimanche de Pâques": {
