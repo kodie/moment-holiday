@@ -290,11 +290,20 @@ moment('2017-01-01').holidaysBetween();
 ```
 
 ### Global Parameters
-* **adjust** - Set to `true` to make all holidays that land on a Saturday go to the prior Friday and all holidays that land on a Sunday go to the following Monday. Defaults to `false`.
+* **adjust** - Set to `true` to make all holidays that land on a Saturday go to the prior Friday and all holidays that land on a Sunday go to the following Monday. Set to `"forward"` to make all holidays that land on weekends go to the following Monday. Defaults to `false`.
 
 ## The Holidays
 
 ### Available Locales/Regions
+* [Australia](locale/australia.js)
+  * `Australia/ACT` - Australian Capital Territory
+  * `Australia/NSW` - New South Wales
+  * `Australia/NT`  - Northern Territory
+  * `Australia/QLD` - Queensland
+  * `Australia/SA`  - South Australia
+  * `Australia/TAS` - Tasmania
+  * `Australia/VIC` - Victoria
+  * `Australia/WA`  - Western Australia
 * [Argentina](locale/argentina.js)
 * [Canada](locale/canada.js)
   * `Canada/AB` - Alberta
