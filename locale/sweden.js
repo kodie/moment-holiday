@@ -4,7 +4,7 @@
 //! law text : https://www.riksdagen.se/sv/dokument-lagar/dokument/svensk-forfattningssamling/lag-1989253-om-allmanna-helgdagar_sfs-1989-253
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? require('moment') : this.moment;
+  var moment = this.moment || require('moment');
 
   moment.holidays.sweden = {
     "Nyårsdagen": {

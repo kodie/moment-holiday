@@ -1,5 +1,5 @@
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? require('moment') : this.moment;
+  var moment = this.moment || require('moment');
 
   moment.holidays.colombia = {
     "Día de los Reyes Magos": {

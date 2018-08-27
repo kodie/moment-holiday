@@ -4,7 +4,7 @@
 // based on Google Calendar of Italian Holidays : https://calendar.google.com/calendar/embed?src=it.italian%23holiday%40group.v.calendar.google.com&ctz=Europe%2FRome
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? require('moment') : this.moment;
+  var moment = this.moment || require('moment');
 
   moment.holidays.italy = {
     "Assunzione / Ferragosto": {

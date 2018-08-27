@@ -1,0 +1,5 @@
+{
+  "commands": [
+    "*.{ts,js,jsx,json,css} : yarn run prettier --single-quote --no-semi --write {relFullPath}"
+  ]
+}

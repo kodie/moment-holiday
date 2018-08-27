@@ -4,7 +4,7 @@
 //! national holidays only
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? require('moment') : this.moment;
+  var moment = this.moment || require('moment');
 
   moment.holidays.portugal = {
     "Dia de Ano-Novo": {
