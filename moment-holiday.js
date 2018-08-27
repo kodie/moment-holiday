@@ -8,8 +8,7 @@
 
 
 (function() {
-  var moment = require('moment');
-  // var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? require('moment') : this.moment;
+  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? require('moment') : this.moment;
 
   var parserExtensions = [];
 
@@ -287,13 +286,13 @@
     locale = regions[0].toLowerCase().replace(' ', '_');
     regions.shift();
 
-    if (!moment.holidays[locale]) {
-      try {
-        var path = './locale/';
-        if (__dirname.split('/').slice(-1).pop() == 'build') { path = '.' + path; }
-        require(path + locale);
-      } catch(e) { }
-    }
+    // if (!moment.holidays[locale]) {
+    //   try {
+    //     var path = './locale/';
+    //     if (__dirname.split('/').slice(-1).pop() == 'build') { path = '.' + path; }
+    //     require(path + locale);
+    //   } catch(e) { }
+    // }
 
     if (moment.holidays[locale]) {
       if (regions.length) { return compileRegions(locale, regions); }
