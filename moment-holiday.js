@@ -1,11 +1,15 @@
 //! moment-holiday.js
-//! version : 1.5.1
-//! author : Kodie Grantham
+//! version : 2.0
+//! author: Benjamin Dequevauviller
+//! forked from : Kodie Grantham
 //! license : MIT
-//! https://github.com/kodie/moment-holiday
+//! forked from :  https://github.com/kodie/moment-holiday
+//! https://github.com/passiverecords/moment-holiday
+
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? require('moment') : this.moment;
+  var moment = require('moment');
+  // var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? require('moment') : this.moment;
 
   var parserExtensions = [];
 
@@ -371,7 +375,7 @@
     return Object.assign({}, o1, o2);
   };
 
-  moment.fn.holiday = function(holidays, adjust) {
+  moment.prototype.holiday = function(holidays, adjust) {
     var h = moment.holidays.active;
     var d = {};
     var single = false;
@@ -397,11 +401,11 @@
     return d;
   };
 
-  moment.fn.holidays = function(holidays, adjust) {
+  moment.prototype.holidays = function(holidays, adjust) {
     return this.holiday(holidays, adjust);
   };
 
-  moment.fn.isHoliday = function(holidays, adjust) {
+  moment.prototype.isHoliday = function(holidays, adjust) {
     var h, returnTitle, hs = [];
 
     if (holidays) {
@@ -439,23 +443,23 @@
     return false;
   };
 
-  moment.fn.previousHoliday = function(count, adjust) {
+  moment.prototype.previousHoliday = function(count, adjust) {
     return holidayLoop(this, count, false, adjust);
   };
 
-  moment.fn.previousHolidays = function(count, adjust) {
+  moment.prototype.previousHolidays = function(count, adjust) {
     return this.previousHoliday(count, adjust);
   };
 
-  moment.fn.nextHoliday = function(count, adjust) {
+  moment.prototype.nextHoliday = function(count, adjust) {
     return holidayLoop(this, count, true, adjust);
   };
 
-  moment.fn.nextHolidays = function(count, adjust) {
+  moment.prototype.nextHolidays = function(count, adjust) {
     return this.nextHoliday(count, adjust);
   };
 
-  moment.fn.holidaysBetween = function(date, adjust) {
+  moment.prototype.holidaysBetween = function(date, adjust) {
     if (!date) { date = new Date(); }
     date = moment(date).subtract(1, 'day');
 
