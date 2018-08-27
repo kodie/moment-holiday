@@ -1,9 +1,10 @@
 //! moment-holiday.js locale configuration
 //! locale : Brazil
 //! author : Fernando Fabricio dos Santos : https://github.com/ferfabricio
+const MOMENT = require('moment')
 
 (function() {
-  var moment = this.moment || require('moment');
+  var moment = this.moment || MOMENT
 
   moment.holidays.brazil = {
     'Ano Novo': {

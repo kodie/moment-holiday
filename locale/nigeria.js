@@ -5,7 +5,7 @@
        Abia
        Abuja - FCT
        Adamawa
-       Akwa Ibom 
+       Akwa Ibom
        Anambra
        Bauchi
        Bayelsa
@@ -40,9 +40,10 @@
        Yobe
        Zamfara
 */
+const MOMENT = require('moment')
 
 (function() {
-  var moment = this.moment || require('moment');
+  var moment = this.moment || MOMENT
 
   moment.holidays.nigeria = {
     "New Year's Day": {

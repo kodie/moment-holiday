@@ -15,9 +15,10 @@
       QC : Quebec
       SK : Saskatchewan
 */
+const MOMENT = require('moment')
 
 (function() {
-  var moment = this.moment || require('moment');
+  var moment = this.moment || MOMENT
 
   moment.holidays.canada = {
     "New Year's Day": {

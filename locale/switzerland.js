@@ -29,9 +29,10 @@
       ZG : Zug
       ZH : Zürich
 */
+const MOMENT = require('moment')
 
 (function() {
-  var moment = this.moment || require('moment');
+  var moment = this.moment || MOMENT
 
   moment.holidays.switzerland = {
     "Neujahrstag": {

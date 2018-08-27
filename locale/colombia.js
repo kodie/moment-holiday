@@ -1,5 +1,7 @@
+const MOMENT = require('moment')
+
 (function() {
-  var moment = this.moment || require('moment');
+  var moment = this.moment || MOMENT
 
   moment.holidays.colombia = {
     "Día de los Reyes Magos": {
@@ -47,7 +49,7 @@
     "Todos los Santos ": {
       date: '11/6',
       keywords: ['festividad', 'cristiana']
-    }, 
+    },
     "Independencia de Cartagena":{
     	date: '11/13'
     },
@@ -58,7 +60,7 @@
     "Día de Navidad ": {
       date: '12/8',
       keywords: ['christmas', 'navidad', 'merryxmas']
-   }    
+   }
   };
   if ((typeof module !== 'undefined' && module !== null ? module.exports : void 0) != null) { module.exports = moment; }
 }).call(this);

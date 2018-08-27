@@ -2,9 +2,10 @@
 //! locale : Sweden
 //! author : Faleij : https://github.com/faleij
 //! law text : https://www.riksdagen.se/sv/dokument-lagar/dokument/svensk-forfattningssamling/lag-1989253-om-allmanna-helgdagar_sfs-1989-253
+const MOMENT = require('moment')
 
 (function() {
-  var moment = this.moment || require('moment');
+  var moment = this.moment || MOMENT
 
   moment.holidays.sweden = {
     "Nyårsdagen": {

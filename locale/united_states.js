@@ -1,9 +1,10 @@
 //! moment-holiday.js locale configuration
 //! locale : United States
 //! author : Kodie Grantham : https://github.com/kodie
+const MOMENT = require('moment')
 
 (function() {
-  var moment = this.moment || require('moment');
+  var moment = this.moment || MOMENT
 
   moment.holidays.united_states = {
     "New Year's Day": {

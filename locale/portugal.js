@@ -2,9 +2,10 @@
 //! locale : Portugal
 //! author : Pedro Martins : https://github.com/xmaarf
 //! national holidays only
+const MOMENT = require('moment')
 
 (function() {
-  var moment = this.moment || require('moment');
+  var moment = this.moment || MOMENT
 
   moment.holidays.portugal = {
     "Dia de Ano-Novo": {

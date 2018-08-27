@@ -5,13 +5,9 @@
 //! license : MIT
 //! forked from :  https://github.com/kodie/moment-holiday
 //! https://github.com/passiverecords/moment-holiday
-
 const MOMENT = require('moment')
 ;(function() {
-  var moment =
-    typeof require !== 'undefined' && require !== null && !require.amd
-      ? MOMENT
-      : this.moment
+  var moment = this.moment || MOMENT
   var parserExtensions = []
 
   var parseHoliday = function(self, date, adjust) {
@@ -782,9 +778,10 @@ const MOMENT = require('moment')
 //! moment-holiday.js locale configuration
 //! locale : United States
 //! author : Kodie Grantham : https://github.com/kodie
+const MOMENT = require('moment')
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? MOMENT : this.moment;
+  var moment = this.moment || MOMENT
 
   moment.holidays.united_states = {
     "New Year's Day": {
@@ -877,9 +874,10 @@ const MOMENT = require('moment')
 //! moment-holiday.js locale configuration
 //! locale : Easter Related Holidays
 //! author : Kodie Grantham : https://github.com/kodie
+const MOMENT = require('moment')
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? MOMENT : this.moment;
+  var moment = this.moment || MOMENT
 
   moment.holidays.easter = {
     "Ash Wednesday": {

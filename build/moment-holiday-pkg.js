@@ -5,13 +5,9 @@
 //! license : MIT
 //! forked from :  https://github.com/kodie/moment-holiday
 //! https://github.com/passiverecords/moment-holiday
-
 const MOMENT = require('moment')
 ;(function() {
-  var moment =
-    typeof require !== 'undefined' && require !== null && !require.amd
-      ? MOMENT
-      : this.moment
+  var moment = this.moment || MOMENT
   var parserExtensions = []
 
   var parseHoliday = function(self, date, adjust) {
@@ -782,9 +778,10 @@ const MOMENT = require('moment')
 //! moment-holiday.js locale configuration
 //! locale : Argentina
 //! author : NahuelOvejero : https://github.com/NahuelOvejero
+const MOMENT = require('moment')
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? MOMENT : this.moment;
+  var moment = this.moment || MOMENT
 
   moment.holidays.argentina = {
     "Año Nuevo": {
@@ -858,9 +855,10 @@ const MOMENT = require('moment')
 //! moment-holiday.js locale configuration
 //! locale : Brazil
 //! author : Fernando Fabricio dos Santos : https://github.com/ferfabricio
+const MOMENT = require('moment')
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? MOMENT : this.moment;
+  var moment = this.moment || MOMENT
 
   moment.holidays.brazil = {
     'Ano Novo': {
@@ -926,9 +924,10 @@ const MOMENT = require('moment')
       QC : Quebec
       SK : Saskatchewan
 */
+const MOMENT = require('moment')
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? MOMENT : this.moment;
+  var moment = this.moment || MOMENT
 
   moment.holidays.canada = {
     "New Year's Day": {
@@ -1023,8 +1022,10 @@ const MOMENT = require('moment')
   if ((typeof module !== 'undefined' && module !== null ? module.exports : void 0) != null) { module.exports = moment; }
 }).call(this);
 
+const MOMENT = require('moment')
+
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? MOMENT : this.moment;
+  var moment = this.moment || MOMENT
 
   moment.holidays.colombia = {
     "Día de los Reyes Magos": {
@@ -1072,7 +1073,7 @@ const MOMENT = require('moment')
     "Todos los Santos ": {
       date: '11/6',
       keywords: ['festividad', 'cristiana']
-    }, 
+    },
     "Independencia de Cartagena":{
     	date: '11/13'
     },
@@ -1083,7 +1084,7 @@ const MOMENT = require('moment')
     "Día de Navidad ": {
       date: '12/8',
       keywords: ['christmas', 'navidad', 'merryxmas']
-   }    
+   }
   };
   if ((typeof module !== 'undefined' && module !== null ? module.exports : void 0) != null) { module.exports = moment; }
 }).call(this);
@@ -1091,9 +1092,10 @@ const MOMENT = require('moment')
 //! moment-holiday.js locale configuration
 //! locale : Croatia / Hrvatska
 //! author : diomed : https://github.com/diomed
+const MOMENT = require('moment')
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? MOMENT : this.moment;
+  var moment = this.moment || MOMENT
 
   moment.holidays.croatia = {
     "Nova Godina": {
@@ -1159,9 +1161,10 @@ const MOMENT = require('moment')
 //! moment-holiday.js locale configuration
 //! locale : Denmark
 //! author : Alexander Køpke : https://github.com/alexanderkopke
+const MOMENT = require('moment')
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? MOMENT : this.moment;
+  var moment = this.moment || MOMENT
 
   moment.holidays.denmark = {
     "Nytårsdag": {
@@ -1213,9 +1216,10 @@ const MOMENT = require('moment')
 //! moment-holiday.js locale configuration
 //! locale : Easter Related Holidays
 //! author : Kodie Grantham : https://github.com/kodie
+const MOMENT = require('moment')
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? MOMENT : this.moment;
+  var moment = this.moment || MOMENT
 
   moment.holidays.easter = {
     "Ash Wednesday": {
@@ -1308,9 +1312,10 @@ const MOMENT = require('moment')
 //! moment-holiday.js locale configuration
 //! locale : Finland
 //! author : Kodie Grantham : https://github.com/kodie
+const MOMENT = require('moment')
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? MOMENT : this.moment;
+  var moment = this.moment || MOMENT
 
   moment.holidays.finland = {
     "Uudenvuodenpäivä": {
@@ -1366,9 +1371,10 @@ const MOMENT = require('moment')
 //! locale : FR
 //! locale-author : Benjamin Dequevauviller : https://github.com/blurp1478963
 //
+const MOMENT = require('moment')
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? MOMENT : this.moment;
+  var moment = this.moment || MOMENT
 
   moment.holidays.france = {
     "Jour de l'an": {
@@ -1439,9 +1445,10 @@ const MOMENT = require('moment')
       ST : Sachsen-Anhalt
       TH : Thüringen
 */
+const MOMENT = require('moment')
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? MOMENT : this.moment;
+  var moment = this.moment || MOMENT
 
   moment.holidays.germany = {
     "Neujahrstag": {
@@ -1538,9 +1545,10 @@ const MOMENT = require('moment')
        Tema
        Koforidua
 */
+const MOMENT = require('moment')
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? MOMENT : this.moment;
+  var moment = this.moment || MOMENT
 
   moment.holidays.ghana = {
     "New Year's Day": {
@@ -1613,9 +1621,10 @@ const MOMENT = require('moment')
 //! moment-holiday.js locale configuration
 //! locale : India
 //! author : wonder2991 : https://github.com/wonder2991
+const MOMENT = require('moment')
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? MOMENT : this.moment;
+  var moment = this.moment || MOMENT
 
   moment.holidays.india = {
     "New Year's Day": {
@@ -1655,9 +1664,10 @@ const MOMENT = require('moment')
 //! locale : Italy
 //! author : Lorenzo Brutti : https://github.com/lbrutti
 // based on Google Calendar of Italian Holidays : https://calendar.google.com/calendar/embed?src=it.italian%23holiday%40group.v.calendar.google.com&ctz=Europe%2FRome
+const MOMENT = require('moment')
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? MOMENT : this.moment;
+  var moment = this.moment || MOMENT
 
   moment.holidays.italy = {
     "Assunzione / Ferragosto": {
@@ -1709,9 +1719,10 @@ const MOMENT = require('moment')
 //! moment-holiday.js locale configuration
 //! locale : Japan
 //! author : garroadran : https://github.com/garroadran/
+const MOMENT = require('moment')
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? MOMENT : this.moment;
+  var moment = this.moment || MOMENT
 
   moment.holidays.japan = {
     "Gantan": {
@@ -1790,7 +1801,7 @@ const MOMENT = require('moment')
        Abia
        Abuja - FCT
        Adamawa
-       Akwa Ibom 
+       Akwa Ibom
        Anambra
        Bauchi
        Bayelsa
@@ -1825,9 +1836,10 @@ const MOMENT = require('moment')
        Yobe
        Zamfara
 */
+const MOMENT = require('moment')
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? MOMENT : this.moment;
+  var moment = this.moment || MOMENT
 
   moment.holidays.nigeria = {
     "New Year's Day": {
@@ -1917,13 +1929,15 @@ const MOMENT = require('moment')
 
   if ((typeof module !== 'undefined' && module !== null ? module.exports : void 0) != null) { module.exports = moment; }
 }).call(this);
+
 //! moment-holiday locale configuration
 //! locale : Portugal
 //! author : Pedro Martins : https://github.com/xmaarf
 //! national holidays only
+const MOMENT = require('moment')
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? MOMENT : this.moment;
+  var moment = this.moment || MOMENT
 
   moment.holidays.portugal = {
     "Dia de Ano-Novo": {
@@ -1977,9 +1991,10 @@ const MOMENT = require('moment')
 //! moment-holiday.js locale configuration
 //! locale : Russa
 //! author : Vasilii Vakhtin : https://github.com/Vasil11
+const MOMENT = require('moment')
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? MOMENT : this.moment;
+  var moment = this.moment || MOMENT
 
   moment.holidays.russia = {
     "New Year and Christmas Holidays": {
@@ -2023,9 +2038,10 @@ const MOMENT = require('moment')
 //! locale : Sweden
 //! author : Faleij : https://github.com/faleij
 //! law text : https://www.riksdagen.se/sv/dokument-lagar/dokument/svensk-forfattningssamling/lag-1989253-om-allmanna-helgdagar_sfs-1989-253
+const MOMENT = require('moment')
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? MOMENT : this.moment;
+  var moment = this.moment || MOMENT
 
   moment.holidays.sweden = {
     "Nyårsdagen": {
@@ -2084,6 +2100,7 @@ const MOMENT = require('moment')
 
   if ((typeof module !== 'undefined' && module !== null ? module.exports : void 0) != null) { module.exports = moment; }
 }).call(this);
+
 //! moment-holiday.js locale configuration
 //! locale : Switzerland
 //! author : Kodie Grantham : https://github.com/kodie
@@ -2115,9 +2132,10 @@ const MOMENT = require('moment')
       ZG : Zug
       ZH : Zürich
 */
+const MOMENT = require('moment')
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? MOMENT : this.moment;
+  var moment = this.moment || MOMENT
 
   moment.holidays.switzerland = {
     "Neujahrstag": {
@@ -2277,9 +2295,10 @@ const MOMENT = require('moment')
       WL : Wales
       NI : Northern Island
 */
+const MOMENT = require('moment')
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? MOMENT : this.moment;
+  var moment = this.moment || MOMENT
 
   moment.holidays.united_kingdom = {
     "New Year's Day": {
@@ -2390,9 +2409,10 @@ const MOMENT = require('moment')
 //! moment-holiday.js locale configuration
 //! locale : United States
 //! author : Kodie Grantham : https://github.com/kodie
+const MOMENT = require('moment')
 
 (function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? MOMENT : this.moment;
+  var moment = this.moment || MOMENT
 
   moment.holidays.united_states = {
     "New Year's Day": {

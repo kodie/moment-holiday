@@ -1,9 +1,10 @@
 //! moment-holiday.js locale configuration
 //! locale : Finland
 //! author : Kodie Grantham : https://github.com/kodie
+const MOMENT = require('moment')
 
 (function() {
-  var moment = this.moment || require('moment');
+  var moment = this.moment || MOMENT
 
   moment.holidays.finland = {
     "Uudenvuodenpäivä": {

@@ -1,9 +1,10 @@
 //! moment-holiday.js locale configuration
 //! locale : India
 //! author : wonder2991 : https://github.com/wonder2991
+const MOMENT = require('moment')
 
 (function() {
-  var moment = this.moment || require('moment');
+  var moment = this.moment || MOMENT
 
   moment.holidays.india = {
     "New Year's Day": {

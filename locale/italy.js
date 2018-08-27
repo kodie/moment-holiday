@@ -2,9 +2,10 @@
 //! locale : Italy
 //! author : Lorenzo Brutti : https://github.com/lbrutti
 // based on Google Calendar of Italian Holidays : https://calendar.google.com/calendar/embed?src=it.italian%23holiday%40group.v.calendar.google.com&ctz=Europe%2FRome
+const MOMENT = require('moment')
 
 (function() {
-  var moment = this.moment || require('moment');
+  var moment = this.moment || MOMENT
 
   moment.holidays.italy = {
     "Assunzione / Ferragosto": {

@@ -5,9 +5,9 @@
 //! license : MIT
 //! forked from :  https://github.com/kodie/moment-holiday
 //! https://github.com/passiverecords/moment-holiday
-
+const MOMENT = require('moment')
 ;(function() {
-  var moment = this.moment || require('moment')
+  var moment = this.moment || MOMENT
   var parserExtensions = []
 
   var parseHoliday = function(self, date, adjust) {

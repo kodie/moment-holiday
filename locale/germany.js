@@ -14,9 +14,10 @@
       ST : Sachsen-Anhalt
       TH : Thüringen
 */
+const MOMENT = require('moment')
 
 (function() {
-  var moment = this.moment || require('moment');
+  var moment = this.moment || MOMENT
 
   moment.holidays.germany = {
     "Neujahrstag": {
