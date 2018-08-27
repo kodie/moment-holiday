@@ -50,7 +50,7 @@ gulp.task('build', function() {
     locales.push(locale);
   });
 
-  generate(null, null, true, 'moment-holiday.js');
-  generate(['United States', 'Easter'], 'United States', true, 'moment-holiday-us.js');
-  generate(locales, 'United States', true, 'moment-holiday-pkg.js');
+  generate(null, null, false, 'moment-holiday.js');
+  generate(['United States', 'Easter'], 'United States', false, 'moment-holiday-us.js');
+  generate(locales, 'United States', false, 'moment-holiday-pkg.js');
 });
