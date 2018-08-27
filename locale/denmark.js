@@ -1,8 +1,6 @@
 //! moment-holiday.js locale configuration
 //! locale : Denmark
 //! author : Alexander Køpke : https://github.com/alexanderkopke
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 

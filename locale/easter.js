@@ -1,8 +1,6 @@
 //! moment-holiday.js locale configuration
 //! locale : Easter Related Holidays
 //! author : Kodie Grantham : https://github.com/kodie
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 

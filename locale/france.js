@@ -2,8 +2,6 @@
 //! locale : FR
 //! locale-author : Benjamin Dequevauviller : https://github.com/blurp1478963
 //
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 

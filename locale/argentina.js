@@ -1,8 +1,6 @@
 //! moment-holiday.js locale configuration
 //! locale : Argentina
 //! author : NahuelOvejero : https://github.com/NahuelOvejero
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 

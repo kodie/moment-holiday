@@ -2,8 +2,6 @@
 //! locale : Portugal
 //! author : Pedro Martins : https://github.com/xmaarf
 //! national holidays only
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 

@@ -1,8 +1,6 @@
 //! moment-holiday.js locale configuration
 //! locale : Russa
 //! author : Vasilii Vakhtin : https://github.com/Vasil11
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 

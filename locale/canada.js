@@ -15,8 +15,6 @@
       QC : Quebec
       SK : Saskatchewan
 */
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 

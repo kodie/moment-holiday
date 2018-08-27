@@ -1,8 +1,6 @@
 //! moment-holiday.js locale configuration
 //! locale : Croatia / Hrvatska
 //! author : diomed : https://github.com/diomed
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 

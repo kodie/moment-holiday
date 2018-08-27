@@ -778,8 +778,6 @@ const MOMENT = require('moment')
 //! moment-holiday.js locale configuration
 //! locale : Argentina
 //! author : NahuelOvejero : https://github.com/NahuelOvejero
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 
@@ -855,8 +853,6 @@ const MOMENT = require('moment')
 //! moment-holiday.js locale configuration
 //! locale : Brazil
 //! author : Fernando Fabricio dos Santos : https://github.com/ferfabricio
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 
@@ -924,8 +920,6 @@ const MOMENT = require('moment')
       QC : Quebec
       SK : Saskatchewan
 */
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 
@@ -1022,8 +1016,6 @@ const MOMENT = require('moment')
   if ((typeof module !== 'undefined' && module !== null ? module.exports : void 0) != null) { module.exports = moment; }
 }).call(this);
 
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 
@@ -1092,8 +1084,6 @@ const MOMENT = require('moment')
 //! moment-holiday.js locale configuration
 //! locale : Croatia / Hrvatska
 //! author : diomed : https://github.com/diomed
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 
@@ -1161,8 +1151,6 @@ const MOMENT = require('moment')
 //! moment-holiday.js locale configuration
 //! locale : Denmark
 //! author : Alexander Køpke : https://github.com/alexanderkopke
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 
@@ -1216,8 +1204,6 @@ const MOMENT = require('moment')
 //! moment-holiday.js locale configuration
 //! locale : Easter Related Holidays
 //! author : Kodie Grantham : https://github.com/kodie
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 
@@ -1312,8 +1298,6 @@ const MOMENT = require('moment')
 //! moment-holiday.js locale configuration
 //! locale : Finland
 //! author : Kodie Grantham : https://github.com/kodie
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 
@@ -1371,8 +1355,6 @@ const MOMENT = require('moment')
 //! locale : FR
 //! locale-author : Benjamin Dequevauviller : https://github.com/blurp1478963
 //
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 
@@ -1445,8 +1427,6 @@ const MOMENT = require('moment')
       ST : Sachsen-Anhalt
       TH : Thüringen
 */
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 
@@ -1545,8 +1525,6 @@ const MOMENT = require('moment')
        Tema
        Koforidua
 */
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 
@@ -1621,8 +1599,6 @@ const MOMENT = require('moment')
 //! moment-holiday.js locale configuration
 //! locale : India
 //! author : wonder2991 : https://github.com/wonder2991
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 
@@ -1664,8 +1640,6 @@ const MOMENT = require('moment')
 //! locale : Italy
 //! author : Lorenzo Brutti : https://github.com/lbrutti
 // based on Google Calendar of Italian Holidays : https://calendar.google.com/calendar/embed?src=it.italian%23holiday%40group.v.calendar.google.com&ctz=Europe%2FRome
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 
@@ -1719,8 +1693,6 @@ const MOMENT = require('moment')
 //! moment-holiday.js locale configuration
 //! locale : Japan
 //! author : garroadran : https://github.com/garroadran/
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 
@@ -1836,8 +1808,6 @@ const MOMENT = require('moment')
        Yobe
        Zamfara
 */
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 
@@ -1934,8 +1904,6 @@ const MOMENT = require('moment')
 //! locale : Portugal
 //! author : Pedro Martins : https://github.com/xmaarf
 //! national holidays only
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 
@@ -1991,8 +1959,6 @@ const MOMENT = require('moment')
 //! moment-holiday.js locale configuration
 //! locale : Russa
 //! author : Vasilii Vakhtin : https://github.com/Vasil11
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 
@@ -2038,8 +2004,6 @@ const MOMENT = require('moment')
 //! locale : Sweden
 //! author : Faleij : https://github.com/faleij
 //! law text : https://www.riksdagen.se/sv/dokument-lagar/dokument/svensk-forfattningssamling/lag-1989253-om-allmanna-helgdagar_sfs-1989-253
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 
@@ -2132,8 +2096,6 @@ const MOMENT = require('moment')
       ZG : Zug
       ZH : Zürich
 */
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 
@@ -2295,8 +2257,6 @@ const MOMENT = require('moment')
       WL : Wales
       NI : Northern Island
 */
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 
@@ -2409,8 +2369,6 @@ const MOMENT = require('moment')
 //! moment-holiday.js locale configuration
 //! locale : United States
 //! author : Kodie Grantham : https://github.com/kodie
-const MOMENT = require('moment')
-
 (function() {
   var moment = this.moment || MOMENT
 
