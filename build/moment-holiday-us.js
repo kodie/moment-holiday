@@ -757,29 +757,6 @@ moment.modifyHolidays = {
   }
 }
 
-// moment.holidays.easter = require('./locale/easter.js')
-//
-// moment.holidays.argentina = require('./locale/argentina.js')
-// moment.holidays.brazil = require('./locale/brazil.js')
-// moment.holidays.canada = require('./locale/canada.js')
-// moment.holidays.colombia = require('./locale/colombia.js')
-// moment.holidays.croatia = require('./locale/croatia.js')
-// moment.holidays.denmark = require('./locale/denmark.js')
-// moment.holidays.finland = require('./locale/finland.js')
-// moment.holidays.france = require('./locale/france.js')
-// moment.holidays.germany = require('./locale/germany.js')
-// moment.holidays.ghana = require('./locale/ghana.js')
-// moment.holidays.india = require('./locale/india.js')
-// moment.holidays.italy = require('./locale/italy.js')
-// moment.holidays.japan = require('./locale/japan.js')
-// moment.holidays.nigeria = require('./locale/nigeria.js')
-// moment.holidays.portugal = require('./locale/portugal.js')
-// moment.holidays.russia = require('./locale/russia.js')
-// moment.holidays.sweden = require('./locale/sweden.js')
-// moment.holidays.switzerland = require('./locale/switzerland.js')
-// moment.holidays.united_kingdom = require('./locale/united_kingdom.js')
-// moment.holidays.united_states = require('./locale/united_states.js')
-
 if (
   (typeof module !== 'undefined' && module !== null
     ? module.exports
@@ -874,7 +851,6 @@ module.exports.holidays.united_states = {
   }
 }
 
-
 module.exports.holidays.easter = {
   'Ash Wednesday': {
     date: 'easter-46'
@@ -943,7 +919,7 @@ var easter = function(y) {
   return moment([y, m - 1, d])
 }
 
-module.exports.holidays.extendParser(function(m, date) {
+module.exports.modifyHolidays.extendParser(function(m, date) {
   if (~date.indexOf('easter')) {
     var dates = date.split('|')
     var ds = []
