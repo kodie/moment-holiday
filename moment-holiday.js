@@ -1,5 +1,5 @@
 //! moment-holiday.js
-//! version : 2.0
+//! version : 2.0.0rc
 //! author: Benjamin Dequevauviller
 //! forked from : Kodie Grantham
 //! license : MIT
