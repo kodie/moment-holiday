@@ -1,4 +1,3 @@
-
 module.exports.holidays.easter = {
   'Ash Wednesday': {
     date: 'easter-46'
@@ -67,7 +66,7 @@ var easter = function(y) {
   return moment([y, m - 1, d])
 }
 
-module.exports.holidays.extendParser(function(m, date) {
+module.exports.modifyHolidays.extendParser(function(m, date) {
   if (~date.indexOf('easter')) {
     var dates = date.split('|')
     var ds = []
