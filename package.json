@@ -1,6 +1,6 @@
 {
   "name": "moment-holiday",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A Moment.js plugin for handling holidays.",
   "keywords": [
     "moment",
@@ -34,7 +34,7 @@
   },
   "homepage": "https://github.com/kodie/moment-holiday",
   "license": "MIT",
-  "main": "./build/moment-holiday-pkg.min.js",
+  "main": "./build/moment-holiday-pkg.js",
   "files": [
     "build/",
     "locale/"
