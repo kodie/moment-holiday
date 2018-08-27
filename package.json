@@ -1,6 +1,6 @@
 {
   "name": "moment-holiday",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "A Moment.js plugin for handling holidays.",
   "keywords": [
     "moment",
