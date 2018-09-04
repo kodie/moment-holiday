@@ -12,7 +12,7 @@
       keywords: ['nyårsdag', 'nyår', 'new', 'years']
     },
     "Trettondedag jul": {
-      date: '6/1',
+      date: '1/6',
       keywords: ['trettondedag', 'trettondedagen', 'trettonde']
     },
     "Långfredagen": {
@@ -52,11 +52,11 @@
       keywords: ['helgon', 'alla helgon', 'helgon dag', 'saturday']
     },
     "Juldagen": {
-      date: '12/24',
+      date: '12/25',
       keywords: ['christmas']
     },
     "Annandag jul": {
-      date: '12/25',
+      date: '12/26',
       keywords: ['annandag jul']
     }
   };
