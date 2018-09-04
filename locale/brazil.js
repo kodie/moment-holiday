@@ -30,7 +30,7 @@
       keywords: ['labour']
     },
     'Dia da Independência do Brasil': {
-      date: '8/7',
+      date: '9/7',
       keywords: ['independency']
     },
     'Nossa Senhora Aparecida': {
