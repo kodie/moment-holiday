@@ -522,3 +522,13 @@ test('easter_parser_3', function(t){
   t.true(w.isSame(moment('2006-04-13'), 'day'), e(em));
   moment.modifyHolidays.undo();
 });
+
+test('day_after_thanksgiving_2019', function(t){
+  moment.modifyHolidays.set('United States');
+  var novemberHolidays = moment('2019-11-01').holidaysBetween('2019-11-30');
+  t.true(novemberHolidays.length === 3); // veteran's day, thanksgiving, day after thanksgiving
+  t.true(novemberHolidays[0].format('YYYY-MM-DD') === '2019-11-11'); // veteran's day
+  t.true(novemberHolidays[1].format('YYYY-MM-DD') === '2019-11-28'); // thanksgiving
+  t.true(novemberHolidays[2].format('YYYY-MM-DD') === '2019-11-29'); // day after thanksgiving
+  moment.modifyHolidays.undo();
+});
