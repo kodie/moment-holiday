@@ -10,7 +10,7 @@
 (function() {
   var moment = require("moment");
 
-  moment.holidays.united_kingdom = {
+  moment.holidays.belgium = {
     "Nieuwjaar": {
       date: '1/1',
       keywords: ['nieuwjaardag'],
