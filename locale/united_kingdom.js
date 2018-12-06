@@ -101,7 +101,7 @@
       keywords: ['poppy', 'remembrance']
     },
     "Saint Andrews Day": {
-      date: '10/30',
+      date: '11/30',
       keywords: ['andrew', 'saint', 'st[\\s\\.]'],
       regions: ['SL']
     },
