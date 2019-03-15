@@ -28,7 +28,7 @@
     },
     "Kristi himmelfart": {
       date: 'easter+39',
-      kaywords: ['ascension']
+      keywords: ['ascension']
     },
     "Pinse": {
       date: 'easter+49',
