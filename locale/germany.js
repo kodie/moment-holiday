@@ -84,9 +84,13 @@
       keywords: ['bub'],
       regions: ['sn']
     },
-    "Weihnachten": {
+    "Heiligabend": {
       date: '12/24',
       keywords: ['christmas']
+    },
+    "Erster Weihnachtsfeiertag": {
+      date: '12/25',
+      keywords_y: ['erster']
     },
     "Zweiter Weihnachtsfeiertag": {
       date: '12/26',
