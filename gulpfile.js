@@ -52,6 +52,9 @@ gulp.task('build', function(done) {
   });
 
   generate(null, null, true, 'moment-holiday.js');
+  generate(null, null, false, 'moment-holiday.js');
+  generate(['Argentina', 'Easter'], 'Argentina', true, 'moment-holiday-ar.js');
+  generate(['Argentina', 'Easter'], 'Argentina', false, 'moment-holiday-ar.js');
   generate(['United States', 'Easter'], 'United States', true, 'moment-holiday-us.js');
   generate(locales, 'United States', true, 'moment-holiday-pkg.js');
 
