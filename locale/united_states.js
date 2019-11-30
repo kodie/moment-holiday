@@ -2,8 +2,13 @@
 //! locale : United States
 //! author : Kodie Grantham : https://github.com/kodie
 
-(function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? require('moment') : this.moment;
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('moment')) :
+  typeof define === 'function' && define.amd ? define(['moment'], factory) :
+  (global = global || self, factory(global.moment)); // jshint ignore:line
+}(this, (function (moment) {
+
+  moment = moment && moment.hasOwnProperty('default') ? moment['default'] : moment;
 
   moment.holidays.united_states = {
     "New Year's Day": {
@@ -90,5 +95,6 @@
     }
   };
 
-  if ((typeof module !== 'undefined' && module !== null ? module.exports : void 0) != null) { module.exports = moment; }
-}).call(this);
+  return moment;
+
+})));

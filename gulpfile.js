@@ -23,9 +23,9 @@ function generate(locales, set, minify, filename) {
 
   if (set) {
     if (set.constructor !== Array) { set = [set]; }
-    append = "\n//! Set default locales\n(function() {\n  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? require('moment') : this.moment;";
+    append = "\n//! Set default locales\n(function (global, factory) {\n  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('moment')) :\n  typeof define === 'function' && define.amd ? define(['moment'], factory) :\n  (global = global || self, factory(global.moment));\n}(this, (function (moment) {\n  moment = moment && moment.hasOwnProperty('default') ? moment['default'] : moment;";
     set.forEach(function(l){ append += '\n  moment.modifyHolidays.add("' + l + '");'; });
-    append += '\n}).call(this);';
+    append += '\n  return moment;\n})));';
   }
 
   return gulp.src(files)
@@ -38,11 +38,12 @@ function generate(locales, set, minify, filename) {
     .pipe(gulp.dest('build/'));
 }
 
-gulp.task('default', function() {
+gulp.task('default', function(done) {
   generate(argv.locale, argv.set, argv.min, argv.name);
+  done();
 });
 
-gulp.task('build', function() {
+gulp.task('build', function(done) {
   var locales = [];
   var localePath = require('path').join(__dirname, 'locale');
   require('fs').readdirSync(localePath).forEach(function(file){
@@ -53,4 +54,6 @@ gulp.task('build', function() {
   generate(null, null, true, 'moment-holiday.js');
   generate(['United States', 'Easter'], 'United States', true, 'moment-holiday-us.js');
   generate(locales, 'United States', true, 'moment-holiday-pkg.js');
+
+  done();
 });

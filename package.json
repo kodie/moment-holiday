@@ -55,6 +55,7 @@
     "yargs": ">=8.0.0"
   },
   "scripts": {
-    "test": "./node_modules/.bin/jshint *.js locale/*.js && ava"
+    "build": "gulp build",
+    "test": "jshint *.js locale/*.js && ava"
   }
 }
