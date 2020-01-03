@@ -10,6 +10,10 @@
       date: '1/1',
       keywords: ['nytarsdag', 'new', 'years']
     },
+    "Skærtorsdag": {
+      date: 'easter-3',
+      keywords: ['skaertorsdag', 'maundy', 'friday']
+    },
     "Skærfredag": {
       date: 'easter-2',
       keywords: ['skaerfredag', 'good', 'friday']
@@ -22,13 +26,13 @@
       date: 'easter+1',
       keywords: ['andenpåskedag', 'andenpaskedag', 'paskedag', 'easter', 'monday']
     },
-    "Første maj": {
-      date: '5/1',
-      keywords: ['førstemaj', 'forstemaj', 'forste', 'maj']
+    "Store bededag": {
+      date: 'easter+33',
+      keywords: ['great', 'prayer', 'day']
     },
     "Kristi himmelfart": {
       date: 'easter+39',
-      kaywords: ['ascension']
+      keywords: ['ascension']
     },
     "Pinse": {
       date: 'easter+49',
