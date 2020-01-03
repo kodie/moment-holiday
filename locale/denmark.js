@@ -42,8 +42,13 @@
       date: '12/24',
       keywords: ['christmas']
     },
-    "Anden juledag": {
+    "Juledag": {
       date: '12/25',
+      keywords: ['juledag'],
+      keywords_y: ['anden']
+    },
+    "Anden juledag": {
+      date: '12/26',
       keywords: ['andenjuledag'],
       keywords_y: ['anden']
     }
