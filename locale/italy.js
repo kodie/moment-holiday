@@ -22,9 +22,6 @@
     "Santo Stefano": {
       date: '12/26'
     },
-    "San Silvestro": {
-      date: '12/31'
-    },
     "Capodanno": {
       date: '01/01'
     },
