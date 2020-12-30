@@ -3,6 +3,10 @@
 
 A [Moment.js](https://github.com/moment/moment) plugin for handling holidays.
 
+## NO LONGER MAINTAINED (DEPRECATED)
+
+Since [Moment.js is being deprecated](https://momentjs.com/docs/#/-project-status/), it only makes sense to deprecate moment-holiday as well. Feel free to fork and use this code in any way you wish however I will no longer be maintaining it.
+
 ## Table of Contents
 * [Requirements](#requirements)
 * [Installation](#installation)
