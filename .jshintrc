@@ -3,5 +3,6 @@
   "boss": true,
   "eqnull": true,
   "shadow": true,
-  "sub": true
+  "sub": true,
+  "asi": true
 }
