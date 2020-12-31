@@ -300,6 +300,16 @@ moment('2017-01-01').holidaysBetween();
 
 ### Available Locales/Regions
 * [Argentina](locale/argentina.js)
+* [Austria](locale/austria.js)
+  * `Austria/B` - Burgenland
+  * `Austria/K` - Kärnten
+  * `Austria/NOE` - Niederösterreich
+  * `Austria/OOE` - Oberösterreich
+  * `Austria/S` - Salzburg
+  * `Austria/ST` - Steiermark
+  * `Austria/T` - Tirol
+  * `Austria/V` - Vorarlberl
+  * `Austria/W` - Wien
 * [Canada](locale/canada.js)
   * `Canada/AB` - Alberta
   * `Canada/BC` - British Columbia
