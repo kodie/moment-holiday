@@ -285,10 +285,17 @@
 
     if (!moment.holidays[locale]) {
       try {
-        var path = './locale/';
-        if (__dirname.split('/').slice(-1).pop() == 'build') { path = '.' + path; }
-        require(path + locale);
-      } catch(e) { }
+        var localePath = './locale/';
+        var path = require('path');
+
+        if (__dirname.split(path.sep).slice(-1).pop() == 'build') { 
+          localePath = '.' + localePath; 
+        }
+
+        require(localePath + locale);
+      } catch(e) { 
+        throw e;
+      }
     }
 
     if (moment.holidays[locale]) {
