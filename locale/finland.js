@@ -24,6 +24,10 @@
       date: '11/(6,[1])',
       keywords: ['pyhainpaiva']
     },
+    "Itsenäisyyspäivä": {
+      date: '12/6',
+      keywords: ['independence']
+    },
     "Joulupäivä": {
       date: '12/25',
       keywords: ['joulupaiva', 'christmas']
