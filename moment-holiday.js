@@ -13,7 +13,7 @@
     var days = [], pd;
 
     for (var i = 0; i < parserExtensions.length; i++) {
-      var pe = parserExtensions[i](self, date);
+      var pe = parserExtensions[i](self, date, adjust);
       if (pe || pe === false) { pd = pe; }
     }
 
@@ -116,8 +116,13 @@
       if (!moment.isMoment(days[i])) { delete(days[i]); continue; }
 
       if (adjust) {
-        if (days[i].day() === 0) { days[i] = days[i].add(1, 'day'); }
-        if (days[i].day() === 6) { days[i] = days[i].subtract(1, 'day'); }
+        if (adjust === 'forward') {
+          if (days[i].day() === 0) { days[i] = days[i].add(1, 'day'); }
+          if (days[i].day() === 6) { days[i] = days[i].add(2, 'day'); }
+        } else {
+          if (days[i].day() === 0) { days[i] = days[i].add(1, 'day'); }
+          if (days[i].day() === 6) { days[i] = days[i].subtract(1, 'day'); }
+        }
       }
 
       days[i] = days[i].startOf('day');

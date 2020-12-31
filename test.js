@@ -38,7 +38,8 @@ var emsgs = [
   'Built-in parser should return an array of dates ranging between the specified dates seperated by a vertical bar using the normal built-in parser rules.',
   'Easter parser should return the date of Easter Sunday for the current year when passed easter',
   'Easter parser should return the date of n-days after Easter Sunday when passed easter+n',
-  'Easter parser should return the date of n-days before Easter Sunday when passed easter-n'
+  'Easter parser should return the date of n-days before Easter Sunday when passed easter-n',
+  'modifyHolidays.set() function should cherry-pick holidays from the specified locale if passed a string (the locale) as the first parameter and either a string or an array as the second parameter (the holidays).',
 ];
 
 var locales = [];
@@ -520,5 +521,20 @@ test('easter_parser_3', function(t){
   var w = moment('2006-01-22').holiday('test');
   t.true(moment.isMoment(w), e(em));
   t.true(w.isSame(moment('2006-04-13'), 'day'), e(em));
+  moment.modifyHolidays.undo();
+});
+
+test('modifyHolidays_set_5', function(t){
+  var em = emsgs[37];
+  moment.modifyHolidays.set('Australia/VIC');
+  var w = moment().holidays();
+  t.is(typeof w, 'object', e(em));
+  t.true(moment('2017-01-01').isHoliday("New Year's Day"), e(em));
+  t.true(moment('2017-01-02').isHoliday("New Year's Day", 'forward'), e(em));
+  t.true(moment('2016-12-27').isHoliday("Christmas Day", 'forward'), e(em));
+  t.true(moment('2016-12-26').isHoliday("Boxing Day", 'forward'), e(em));
+  t.true(moment('2015-12-28').isHoliday("Boxing Day", 'forward'), e(em));
+  t.true(moment('2010-12-28').isHoliday("Christmas Day", 'forward'), e(em));
+  t.true(moment('2010-12-27').isHoliday("Boxing Day", 'forward'), e(em));
   moment.modifyHolidays.undo();
 });
