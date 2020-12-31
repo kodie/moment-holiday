@@ -45,6 +45,10 @@
       date: '6/(0,3)',
       keywords: ['dad']
     },
+    "Juneteenth": {
+      date: '6/19',
+      keywords: ['emancipation', 'freedom', 'jubilee', 'liberation']
+    },
     "Independence Day": {
       date: '7/4',
       keywords: ['4th', 'fourth', 'july']
