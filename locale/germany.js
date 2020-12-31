@@ -85,7 +85,7 @@
       regions: ['sn']
     },
     "Weihnachten": {
-      date: '12/24',
+      date: '12/25',
       keywords: ['christmas']
     },
     "Zweiter Weihnachtsfeiertag": {
