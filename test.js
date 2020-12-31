@@ -324,6 +324,16 @@ test('modifyHolidays_set_4', function(t){
   moment.modifyHolidays.undo();
 });
 
+test('modifyHolidays_set_5', function(t){
+  var em = emsgs[17];
+  moment.modifyHolidays.set('Philippines', ['Day of Valor', 'Independence Day']);
+  var w = moment().holidays();
+  t.is(typeof w, 'object', e(em));
+  t.is(Object.keys(w).length, 2, e(em));
+  t.true(moment('2011-06-12').isHoliday('Independence Day'), e(em));
+  moment.modifyHolidays.undo();
+});
+
 test('modifyHolidays_add_1', function(t){
   var em = emsgs[18];
 
