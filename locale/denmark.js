@@ -2,8 +2,13 @@
 //! locale : Denmark
 //! author : Alexander Køpke : https://github.com/alexanderkopke
 
-(function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? require('moment') : this.moment;
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('moment')) :
+  typeof define === 'function' && define.amd ? define(['moment'], factory) :
+  (global = global || self, factory(global.moment)); // jshint ignore:line
+}(this, (function (moment) {
+
+  moment = moment && moment.hasOwnProperty('default') ? moment['default'] : moment;
 
   moment.holidays.denmark = {
     "Nytårsdag": {
@@ -49,5 +54,6 @@
     }
   };
 
-  if ((typeof module !== 'undefined' && module !== null ? module.exports : void 0) != null) { module.exports = moment; }
-}).call(this);
+  return moment;
+
+})));

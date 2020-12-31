@@ -4,8 +4,13 @@
 //! license : MIT
 //! https://github.com/kodie/moment-holiday
 
-(function() {
-  var moment = (typeof require !== 'undefined' && require !== null) && !require.amd ? require('moment') : this.moment;
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('moment')) :
+  typeof define === 'function' && define.amd ? define(['moment'], factory) :
+  (global = global || self, factory(global.moment)); // jshint ignore:line
+}(this, (function (moment) {
+
+  moment = moment && moment.hasOwnProperty('default') ? moment['default'] : moment;
 
   var parserExtensions = [];
 
@@ -283,12 +288,12 @@
     locale = regions[0].toLowerCase().replace(' ', '_');
     regions.shift();
 
-    if (!moment.holidays[locale]) {
-      try {
-        var path = './locale/';
-        if (__dirname.split('/').slice(-1).pop() == 'build') { path = '.' + path; }
-        require(path + locale);
-      } catch(e) { }
+    if (!moment.holidays[locale] && typeof require != 'undefined') {
+      if (typeof process != 'undefined' && process.env.NODE_ENV == 'test') {
+        eval('require')('./locale/' + locale); // jshint ignore:line
+      } else {
+        require('../locale/' + locale);
+      }
     }
 
     if (moment.holidays[locale]) {
@@ -603,5 +608,6 @@
     }
   };
 
-  if ((typeof module !== 'undefined' && module !== null ? module.exports : void 0) != null) { module.exports = moment; }
-}).call(this);
+  return moment;
+
+})));
